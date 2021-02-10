@@ -1,11 +1,9 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.OrderType;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-.dao;
-        .entity.OrderType;
 
 /**
  * 订单类型表(OrderType)表数据库访问层

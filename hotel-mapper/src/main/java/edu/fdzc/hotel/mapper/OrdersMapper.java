@@ -1,11 +1,9 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.Orders;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-.dao;
-        .entity.Orders;
 
 /**
  * (Orders)表数据库访问层

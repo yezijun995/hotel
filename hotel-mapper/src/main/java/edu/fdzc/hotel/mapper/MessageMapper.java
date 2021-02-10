@@ -1,11 +1,9 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.Message;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-.dao;
-        .entity.Message;
 
 /**
  * (Message)表数据库访问层

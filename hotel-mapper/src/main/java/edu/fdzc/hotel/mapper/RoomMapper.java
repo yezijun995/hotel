@@ -1,11 +1,10 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.Room;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-.dao;
-        .entity.Room;
 
 /**
  * (Room)表数据库访问层

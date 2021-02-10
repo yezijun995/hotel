@@ -1,11 +1,10 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.WorkerRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-.dao;
-        .entity.WorkerRole;
 
 /**
  * (WorkerRole)表数据库访问层
