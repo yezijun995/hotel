@@ -8,7 +8,7 @@
         <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
         <result property="menuSort" column="menu_sort" jdbcType="INTEGER"/>
         <result property="menuType" column="menu_type" jdbcType="INTEGER"/>
-        <result property="adminRole" column="admin_role" jdbcType="BYTE"/>
+        <result property="adminRole" column="admin_role" jdbcType="TINYINT"/>
         <result property="hotelId" column="hotel_id" jdbcType="INTEGER"/>
         <result property="createor" column="createor" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -16,7 +16,7 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="state" column="state" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        <result property="deleted" column="deleted" jdbcType="BYTE"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <!--查询单个-->
