@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fdzc.hotel.mapper.MessageMapper">
+
+    <resultMap type="edu.fdzc.hotel.po.Message" id="MessageMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="parentMessageId" column="parent_message_id" jdbcType="INTEGER"/>
+        <result property="createor" column="createor" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="deleted" jdbcType="BYTE"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MessageMap">
+        select
+          id, user_id, nickname, content, icon, parent_message_id, createor, create_time, updater, update_time, deleted
+        from hotel_dev.message
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MessageMap">
+        select
+          id, user_id, nickname, content, icon, parent_message_id, createor, create_time, updater, update_time, deleted
+        from hotel_dev.message
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="MessageMap">
+        select
+        id, user_id, nickname, content, icon, parent_message_id, createor, create_time, updater, update_time, deleted
+        from hotel_dev.message
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="icon != null and icon != ''">
+                and icon = #{icon}
+            </if>
+            <if test="parentMessageId != null">
+                and parent_message_id = #{parentMessageId}
+            </if>
+            <if test="createor != null">
+                and createor = #{createor}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updater != null">
+                and updater = #{updater}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.message(user_id, nickname, content, icon, parent_message_id, createor, create_time, updater, update_time, deleted)
+        values (#{userId}, #{nickname}, #{content}, #{icon}, #{parentMessageId}, #{createor}, #{createTime}, #{updater}, #{updateTime}, #{deleted})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.message(user_id, nickname, content, icon, parent_message_id, createor, create_time,
+        updater, update_time, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userId}, #{entity.nickname}, #{entity.content}, #{entity.icon}, #{entity.parentMessageId},
+            #{entity.createor}, #{entity.createTime}, #{entity.updater}, #{entity.updateTime}, #{entity.deleted})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.message(user_id, nickname, content, icon, parent_message_id, createor, create_time,
+        updater, update_time, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.userId}, #{entity.nickname}, #{entity.content}, #{entity.icon}, #{entity.parentMessageId},
+            #{entity.createor}, #{entity.createTime}, #{entity.updater}, #{entity.updateTime}, #{entity.deleted})
+        </foreach>
+        on duplicate key update
+        user_id = values(user_id) , nickname = values(nickname) , content = values(content) , icon = values(icon) ,
+        parent_message_id = values(parent_message_id) , createor = values(createor) , create_time = values(create_time)
+        , updater = values(updater) , update_time = values(update_time) , deleted = values(deleted)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hotel_dev.message
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="parentMessageId != null">
+                parent_message_id = #{parentMessageId},
+            </if>
+            <if test="createor != null">
+                createor = #{createor},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updater != null">
+                updater = #{updater},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hotel_dev.message where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fdzc.hotel.mapper.UserMapper">
+
+    <resultMap type="edu.fdzc.hotel.po.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="birth" column="birth" jdbcType="VARCHAR"/>
+        <result property="sign" column="sign" jdbcType="VARCHAR"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
+        <result property="createor" column="createor" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="BYTE"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          id, username, password, nickname, real_name, birth, sign, icon, gender, phone, email, address, id_card, createor, create_time, updater, update_time, state, remark, deleted
+        from hotel_dev.user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          id, username, password, nickname, real_name, birth, sign, icon, gender, phone, email, address, id_card, createor, create_time, updater, update_time, state, remark, deleted
+        from hotel_dev.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+        id, username, password, nickname, real_name, birth, sign, icon, gender, phone, email, address, id_card,
+        createor, create_time, updater, update_time, state, remark, deleted
+        from hotel_dev.user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="realName != null and realName != ''">
+                and real_name = #{realName}
+            </if>
+            <if test="birth != null and birth != ''">
+                and birth = #{birth}
+            </if>
+            <if test="sign != null and sign != ''">
+                and sign = #{sign}
+            </if>
+            <if test="icon != null and icon != ''">
+                and icon = #{icon}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="idCard != null and idCard != ''">
+                and id_card = #{idCard}
+            </if>
+            <if test="createor != null">
+                and createor = #{createor}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updater != null">
+                and updater = #{updater}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.user(username, password, nickname, real_name, birth, sign, icon, gender, phone, email, address, id_card, createor, create_time, updater, update_time, state, remark, deleted)
+        values (#{username}, #{password}, #{nickname}, #{realName}, #{birth}, #{sign}, #{icon}, #{gender}, #{phone}, #{email}, #{address}, #{idCard}, #{createor}, #{createTime}, #{updater}, #{updateTime}, #{state}, #{remark}, #{deleted})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.user(username, password, nickname, real_name, birth, sign, icon, gender, phone, email,
+        address, id_card, createor, create_time, updater, update_time, state, remark, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.username}, #{entity.password}, #{entity.nickname}, #{entity.realName}, #{entity.birth},
+            #{entity.sign}, #{entity.icon}, #{entity.gender}, #{entity.phone}, #{entity.email}, #{entity.address},
+            #{entity.idCard}, #{entity.createor}, #{entity.createTime}, #{entity.updater}, #{entity.updateTime},
+            #{entity.state}, #{entity.remark}, #{entity.deleted})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into hotel_dev.user(username, password, nickname, real_name, birth, sign, icon, gender, phone, email,
+        address, id_card, createor, create_time, updater, update_time, state, remark, deleted)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.username}, #{entity.password}, #{entity.nickname}, #{entity.realName}, #{entity.birth},
+            #{entity.sign}, #{entity.icon}, #{entity.gender}, #{entity.phone}, #{entity.email}, #{entity.address},
+            #{entity.idCard}, #{entity.createor}, #{entity.createTime}, #{entity.updater}, #{entity.updateTime},
+            #{entity.state}, #{entity.remark}, #{entity.deleted})
+        </foreach>
+        on duplicate key update
+        username = values(username) , password = values(password) , nickname = values(nickname) , real_name =
+        values(real_name) , birth = values(birth) , sign = values(sign) , icon = values(icon) , gender = values(gender)
+        , phone = values(phone) , email = values(email) , address = values(address) , id_card = values(id_card) ,
+        createor = values(createor) , create_time = values(create_time) , updater = values(updater) , update_time =
+        values(update_time) , state = values(state) , remark = values(remark) , deleted = values(deleted)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update hotel_dev.user
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="realName != null and realName != ''">
+                real_name = #{realName},
+            </if>
+            <if test="birth != null and birth != ''">
+                birth = #{birth},
+            </if>
+            <if test="sign != null and sign != ''">
+                sign = #{sign},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="idCard != null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="createor != null">
+                createor = #{createor},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updater != null">
+                updater = #{updater},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from hotel_dev.user where id = #{id}
+    </delete>
+
+</mapper>
+
