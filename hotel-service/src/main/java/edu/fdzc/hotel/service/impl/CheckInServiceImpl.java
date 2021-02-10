@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.CheckInMapper;
 import edu.fdzc.hotel.po.CheckIn;
-import edu.fdzc.hotel.service.CheckInService;
+import edu.fdzc.hotel.service.ICheckInService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:28
  */
 @Service("checkInService")
-public class CheckInServiceImpl implements CheckInService {
+public class CheckInServiceImpl implements ICheckInService {
     @Resource
     private CheckInMapper checkInMapper;
 

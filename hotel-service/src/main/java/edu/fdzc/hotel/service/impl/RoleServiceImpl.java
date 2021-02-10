@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.RoleMapper;
 import edu.fdzc.hotel.po.Role;
-import edu.fdzc.hotel.service.RoleService;
+import edu.fdzc.hotel.service.IRoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:31
  */
 @Service("roleService")
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements IRoleService {
     @Resource
     private RoleMapper roleMapper;
 
@@ -75,5 +75,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public boolean deleteById(Long id) {
         return this.roleMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<Role> getUserRolesById(Long id) {
+        return null;
     }
 }

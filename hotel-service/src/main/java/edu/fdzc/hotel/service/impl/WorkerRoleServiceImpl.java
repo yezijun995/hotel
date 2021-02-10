@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.WorkerRoleMapper;
 import edu.fdzc.hotel.po.WorkerRole;
-import edu.fdzc.hotel.service.WorkerRoleService;
+import edu.fdzc.hotel.service.IWorkerRoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:34
  */
 @Service("workerRoleService")
-public class WorkerRoleServiceImpl implements WorkerRoleService {
+public class WorkerRoleServiceImpl implements IWorkerRoleService {
     @Resource
     private WorkerRoleMapper workerRoleMapper;
 

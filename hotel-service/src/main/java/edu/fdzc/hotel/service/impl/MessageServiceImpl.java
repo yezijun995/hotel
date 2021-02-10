@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.MessageMapper;
 import edu.fdzc.hotel.po.Message;
-import edu.fdzc.hotel.service.MessageService;
+import edu.fdzc.hotel.service.IMessageService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:30
  */
 @Service("messageService")
-public class MessageServiceImpl implements MessageService {
+public class MessageServiceImpl implements IMessageService {
     @Resource
     private MessageMapper messageMapper;
 

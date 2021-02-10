@@ -1,16 +1,16 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.Room;
+import edu.fdzc.hotel.po.Menu;
 
 import java.util.List;
 
 /**
- * (Room)表服务接口
+ * (Menu)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:08
+ * @since 2021-02-10 17:54:07
  */
-public interface RoomService {
+public interface IMenuService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface RoomService {
      * @param id 主键
      * @return 实例对象
      */
-    Room queryById(Long id);
+    Menu queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface RoomService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Room> queryAllByLimit(int offset, int limit);
+    List<Menu> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param room 实例对象
+     * @param menu 实例对象
      * @return 实例对象
      */
-    Room insert(Room room);
+    Menu insert(Menu menu);
 
     /**
      * 修改数据
      *
-     * @param room 实例对象
+     * @param menu 实例对象
      * @return 实例对象
      */
-    Room update(Room room);
+    Menu update(Menu menu);
 
     /**
      * 通过主键删除数据
@@ -52,5 +52,11 @@ public interface RoomService {
      * @return 是否成功
      */
     boolean deleteById(Long id);
+
+    /**
+     * 查询全部菜单
+     * @return
+     */
+    List<Menu> queryAllMenu();
 
 }

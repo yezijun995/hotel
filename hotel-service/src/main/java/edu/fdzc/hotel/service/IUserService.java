@@ -1,16 +1,17 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.CheckIn;
+import edu.fdzc.hotel.po.Role;
+import edu.fdzc.hotel.po.User;
 
 import java.util.List;
 
 /**
- * 入住退房登记表(CheckIn)表服务接口
+ * 用户表(User)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:03
+ * @since 2021-02-10 17:54:08
  */
-public interface CheckInService {
+public interface IUserService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +19,7 @@ public interface CheckInService {
      * @param id 主键
      * @return 实例对象
      */
-    CheckIn queryById(Long id);
+    User queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +28,23 @@ public interface CheckInService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<CheckIn> queryAllByLimit(int offset, int limit);
+    List<User> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param checkIn 实例对象
+     * @param user 实例对象
      * @return 实例对象
      */
-    CheckIn insert(CheckIn checkIn);
+    User insert(User user);
 
     /**
      * 修改数据
      *
-     * @param checkIn 实例对象
+     * @param user 实例对象
      * @return 实例对象
      */
-    CheckIn update(CheckIn checkIn);
+    User update(User user);
 
     /**
      * 通过主键删除数据
@@ -53,4 +54,7 @@ public interface CheckInService {
      */
     boolean deleteById(Long id);
 
+    User loadUserByUsername(String username);
+
+    List<Role> getUserRoleById(Long id);
 }

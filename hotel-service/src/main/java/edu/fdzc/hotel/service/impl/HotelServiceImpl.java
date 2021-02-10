@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.HotelMapper;
 import edu.fdzc.hotel.po.Hotel;
-import edu.fdzc.hotel.service.HotelService;
+import edu.fdzc.hotel.service.IHotelService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:29
  */
 @Service("hotelService")
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl implements IHotelService {
     @Resource
     private HotelMapper hotelMapper;
 

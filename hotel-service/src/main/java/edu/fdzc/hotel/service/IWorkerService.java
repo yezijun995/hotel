@@ -1,16 +1,16 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.Message;
+import edu.fdzc.hotel.po.Worker;
 
 import java.util.List;
 
 /**
- * (Message)表服务接口
+ * (Worker)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:08
+ * @since 2021-02-10 17:54:11
  */
-public interface MessageService {
+public interface IWorkerService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface MessageService {
      * @param id 主键
      * @return 实例对象
      */
-    Message queryById(Long id);
+    Worker queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface MessageService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Message> queryAllByLimit(int offset, int limit);
+    List<Worker> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param message 实例对象
+     * @param worker 实例对象
      * @return 实例对象
      */
-    Message insert(Message message);
+    Worker insert(Worker worker);
 
     /**
      * 修改数据
      *
-     * @param message 实例对象
+     * @param worker 实例对象
      * @return 实例对象
      */
-    Message update(Message message);
+    Worker update(Worker worker);
 
     /**
      * 通过主键删除数据

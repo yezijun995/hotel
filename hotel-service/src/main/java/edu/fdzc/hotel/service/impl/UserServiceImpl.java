@@ -1,8 +1,9 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.UserMapper;
+import edu.fdzc.hotel.po.Role;
 import edu.fdzc.hotel.po.User;
-import edu.fdzc.hotel.service.UserService;
+import edu.fdzc.hotel.service.IUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:32
  */
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
     @Resource
     private UserMapper userMapper;
 
@@ -75,5 +76,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteById(Long id) {
         return this.userMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public User loadUserByUsername(String username) {
+        return this.userMapper.loadUserByUsername(username);
+    }
+
+    @Override
+    public List<Role> getUserRoleById(Long id) {
+        return this.userMapper.getUserRoleById(id);
     }
 }

@@ -1,16 +1,16 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.Worker;
+import edu.fdzc.hotel.po.Role;
 
 import java.util.List;
 
 /**
- * (Worker)表服务接口
+ * (Role)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:11
+ * @since 2021-02-10 17:54:08
  */
-public interface WorkerService {
+public interface IRoleService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface WorkerService {
      * @param id 主键
      * @return 实例对象
      */
-    Worker queryById(Long id);
+    Role queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface WorkerService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Worker> queryAllByLimit(int offset, int limit);
+    List<Role> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param worker 实例对象
+     * @param role 实例对象
      * @return 实例对象
      */
-    Worker insert(Worker worker);
+    Role insert(Role role);
 
     /**
      * 修改数据
      *
-     * @param worker 实例对象
+     * @param role 实例对象
      * @return 实例对象
      */
-    Worker update(Worker worker);
+    Role update(Role role);
 
     /**
      * 通过主键删除数据
@@ -53,4 +53,5 @@ public interface WorkerService {
      */
     boolean deleteById(Long id);
 
+    List<Role> getUserRolesById(Long id);
 }

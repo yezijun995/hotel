@@ -1,16 +1,16 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.Orders;
+import edu.fdzc.hotel.po.WorkerRole;
 
 import java.util.List;
 
 /**
- * (Orders)表服务接口
+ * (WorkerRole)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:08
+ * @since 2021-02-10 17:54:11
  */
-public interface OrdersService {
+public interface IWorkerRoleService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface OrdersService {
      * @param id 主键
      * @return 实例对象
      */
-    Orders queryById(Long id);
+    WorkerRole queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface OrdersService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Orders> queryAllByLimit(int offset, int limit);
+    List<WorkerRole> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param orders 实例对象
+     * @param workerRole 实例对象
      * @return 实例对象
      */
-    Orders insert(Orders orders);
+    WorkerRole insert(WorkerRole workerRole);
 
     /**
      * 修改数据
      *
-     * @param orders 实例对象
+     * @param workerRole 实例对象
      * @return 实例对象
      */
-    Orders update(Orders orders);
+    WorkerRole update(WorkerRole workerRole);
 
     /**
      * 通过主键删除数据

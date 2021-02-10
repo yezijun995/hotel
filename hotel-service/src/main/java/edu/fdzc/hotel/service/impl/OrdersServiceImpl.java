@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.OrdersMapper;
 import edu.fdzc.hotel.po.Orders;
-import edu.fdzc.hotel.service.OrdersService;
+import edu.fdzc.hotel.service.IOrdersService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:31
  */
 @Service("ordersService")
-public class OrdersServiceImpl implements OrdersService {
+public class OrdersServiceImpl implements IOrdersService {
     @Resource
     private OrdersMapper ordersMapper;
 

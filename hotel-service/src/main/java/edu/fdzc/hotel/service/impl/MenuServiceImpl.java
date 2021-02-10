@@ -1,8 +1,8 @@
-package edu.fdzc.hotel.service.service.impl;
+package edu.fdzc.hotel.service.impl;
 
 import edu.fdzc.hotel.mapper.MenuMapper;
 import edu.fdzc.hotel.po.Menu;
-import edu.fdzc.hotel.service.MenuService;
+import edu.fdzc.hotel.service.IMenuService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2021-02-10 17:57:30
  */
 @Service("menuService")
-public class MenuServiceImpl implements MenuService {
+public class MenuServiceImpl implements IMenuService {
     @Resource
     private MenuMapper menuMapper;
 
@@ -76,5 +76,10 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public boolean deleteById(Long id) {
         return this.menuMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public List<Menu> queryAllMenu() {
+        return this.menuMapper.queryAllMenu();
     }
 }

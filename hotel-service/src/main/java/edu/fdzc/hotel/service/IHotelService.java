@@ -1,16 +1,16 @@
 package edu.fdzc.hotel.service;
 
-import edu.fdzc.hotel.po.RoomType;
+import edu.fdzc.hotel.po.Hotel;
 
 import java.util.List;
 
 /**
- * 房间类型表(RoomType)表服务接口
+ * (Hotel)表服务接口
  *
  * @author yezj
- * @since 2021-02-10 17:54:08
+ * @since 2021-02-10 17:54:05
  */
-public interface RoomTypeService {
+public interface IHotelService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +18,7 @@ public interface RoomTypeService {
      * @param id 主键
      * @return 实例对象
      */
-    RoomType queryById(Long id);
+    Hotel queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +27,23 @@ public interface RoomTypeService {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<RoomType> queryAllByLimit(int offset, int limit);
+    List<Hotel> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param roomType 实例对象
+     * @param hotel 实例对象
      * @return 实例对象
      */
-    RoomType insert(RoomType roomType);
+    Hotel insert(Hotel hotel);
 
     /**
      * 修改数据
      *
-     * @param roomType 实例对象
+     * @param hotel 实例对象
      * @return 实例对象
      */
-    RoomType update(RoomType roomType);
+    Hotel update(Hotel hotel);
 
     /**
      * 通过主键删除数据
