@@ -1,5 +1,6 @@
 package edu.fdzc.hotel.mapper;
 
+import edu.fdzc.hotel.po.Role;
 import edu.fdzc.hotel.po.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -80,5 +81,18 @@ public interface UserMapper {
      */
     int deleteById(Long id);
 
+    /**
+     * 登录验证查询
+     * @param username
+     * @return
+     */
+    User loadUserByUsername(String username);
+
+    /**
+     * 查找用户权限
+     * @param id
+     * @return
+     */
+    List<Role> getUserRoleById(Long id);
 }
 

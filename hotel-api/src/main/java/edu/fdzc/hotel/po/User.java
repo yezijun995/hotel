@@ -1,7 +1,12 @@
 package edu.fdzc.hotel.po;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户表(User)实体类
@@ -92,6 +97,15 @@ public class User implements Serializable {
      */
     private Byte deleted;
 
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

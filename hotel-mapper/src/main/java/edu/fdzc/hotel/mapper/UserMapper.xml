@@ -217,5 +217,15 @@
         delete from hotel_dev.user where id = #{id}
     </delete>
 
+    <!--查询用户名-->
+    <select id="loadUserByUsername" resultMap="UserMap">
+            select * from hotel_dev.user where username=#{username}
+    </select>
+
+    <!--查询用户角色权限-->
+    <select id="getUserRoleById" resultType="edu.fdzc.hotel.po.Role">
+        select r.* from hotel_dev.role r,hotel_dev.user_role ur where ur.role_id = r.id and ur.user_id = #{id}
+    </select>
+
 </mapper>
 
