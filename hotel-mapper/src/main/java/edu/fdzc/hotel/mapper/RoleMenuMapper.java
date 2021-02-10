@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * (RoleMenu)表数据库访问层
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:47:42
  */
 public interface RoleMenuMapper {

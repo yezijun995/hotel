@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * (Hotel)实体类
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:41:31
  */
 public class Hotel implements Serializable {

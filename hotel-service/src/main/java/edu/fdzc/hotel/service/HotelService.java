@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * (Hotel)表服务接口
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 17:54:05
  */
 public interface HotelService {

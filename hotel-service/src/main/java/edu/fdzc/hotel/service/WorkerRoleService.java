@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * (WorkerRole)表服务接口
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 17:54:11
  */
 public interface WorkerRoleService {

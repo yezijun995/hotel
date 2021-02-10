@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 入住退房登记表(CheckIn)表数据库访问层
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:51:35
  */
 public interface CheckInMapper {

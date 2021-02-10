@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 订单类型表(OrderType)表服务接口
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 17:54:08
  */
 public interface OrderTypeService {

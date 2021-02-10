@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 入住退房登记表(CheckIn)表服务接口
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 17:54:03
  */
 public interface CheckInService {

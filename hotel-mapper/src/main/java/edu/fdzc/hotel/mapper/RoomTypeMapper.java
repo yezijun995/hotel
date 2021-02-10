@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 房间类型表(RoomType)表数据库访问层
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:47:43
  */
 public interface RoomTypeMapper {

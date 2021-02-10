@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 房间类型表(RoomType)表服务接口
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 17:54:08
  */
 public interface RoomTypeService {

@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * 入住退房登记表(CheckIn)实体类
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:41:30
  */
 public class CheckIn implements Serializable {

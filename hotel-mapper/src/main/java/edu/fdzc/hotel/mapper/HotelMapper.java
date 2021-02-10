@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * (Hotel)表数据库访问层
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:47:38
  */
 public interface HotelMapper {

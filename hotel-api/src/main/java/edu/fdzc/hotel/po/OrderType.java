@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * 订单类型表(OrderType)实体类
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:41:32
  */
 public class OrderType implements Serializable {

@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * (Menu)实体类
  *
- * @author makejava
+ * @author yezj
  * @since 2021-02-10 16:41:31
  */
 public class Menu implements Serializable {
