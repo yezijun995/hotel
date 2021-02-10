@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123456
+    url: jdbc:mysql:///hotel_dev?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+
+  redis:
+    host: 192.168.106.131
+    database: 0
+    port: 6379
+    password: 123456
+
+server:
+  port: 9091
+  # Gzip压缩
+  compression:
+    enabled: true
