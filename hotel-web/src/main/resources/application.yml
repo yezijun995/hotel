@@ -17,3 +17,7 @@ server:
   # Gzip压缩
   compression:
     enabled: true
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
