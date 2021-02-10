@@ -15,6 +15,11 @@ public class Menu implements Serializable {
      * 主键
      */
     private Long id;
+
+    /**
+     * 请求地址
+     */
+    private String url;
     /**
      * 菜单名称
      */
@@ -65,7 +70,6 @@ public class Menu implements Serializable {
      * 是否删除
      */
     private Byte deleted;
-
 
     public Long getId() {
         return id;
@@ -179,4 +183,11 @@ public class Menu implements Serializable {
         this.deleted = deleted;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

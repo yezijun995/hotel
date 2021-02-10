@@ -30,7 +30,6 @@ public interface MenuMapper {
      */
     List<Menu> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
-
     /**
      * 通过实体作为筛选条件查询
      *
@@ -79,5 +78,10 @@ public interface MenuMapper {
      */
     int deleteById(Long id);
 
+    /**
+     * 查询全部菜单
+     * @return
+     */
+    List<Menu> queryAllMenu();
 }
 
