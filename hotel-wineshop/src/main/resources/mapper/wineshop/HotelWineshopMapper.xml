@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelWineshopMapper">
+    
+    <resultMap type="HotelWineshop" id="HotelWineshopResult">
+        <result property="hotelId"    column="hotel_id"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="email"    column="email"    />
+        <result property="address"    column="address"    />
+        <result property="website"    column="website"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectHotelWineshopVo">
+        select hotel_id, name, phone, telephone, email, address, website, create_by, create_time, update_by, update_time, status, remark, del_flag from hotel_wineshop
+    </sql>
+
+    <select id="selectHotelWineshopList" parameterType="HotelWineshop" resultMap="HotelWineshopResult">
+        <include refid="selectHotelWineshopVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectHotelWineshopById" parameterType="Long" resultMap="HotelWineshopResult">
+        <include refid="selectHotelWineshopVo"/>
+        where hotel_id = #{hotelId}
+    </select>
+        
+    <insert id="insertHotelWineshop" parameterType="HotelWineshop" useGeneratedKeys="true" keyProperty="hotelId">
+        insert into hotel_wineshop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="telephone != null and telephone != ''">telephone,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="website != null and website != ''">website,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="telephone != null and telephone != ''">#{telephone},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="website != null and website != ''">#{website},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHotelWineshop" parameterType="HotelWineshop">
+        update hotel_wineshop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="telephone != null and telephone != ''">telephone = #{telephone},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="website != null and website != ''">website = #{website},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where hotel_id = #{hotelId}
+    </update>
+
+    <delete id="deleteHotelWineshopById" parameterType="Long">
+        delete from hotel_wineshop where hotel_id = #{hotelId}
+    </delete>
+
+    <delete id="deleteHotelWineshopByIds" parameterType="String">
+        delete from hotel_wineshop where hotel_id in 
+        <foreach item="hotelId" collection="array" open="(" separator="," close=")">
+            #{hotelId}
+        </foreach>
+    </delete>
+
+    <select id="checkWineshopNameUnique" parameterType="String" resultType="int">
+		select count(1) from hotel_wineshop where name = #{wineshopName} limit 1
+	</select>
+</mapper>
