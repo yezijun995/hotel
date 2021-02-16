@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelMessageMapper">
+    
+    <resultMap type="HotelMessage" id="HotelMessageResult">
+        <result property="messageId"    column="message_id"    />
+        <result property="hotelId"    column="hotel_id"    />
+        <result property="hotelName"    column="hotel_name"    />
+        <result property="hotelUserId"    column="hotel_user_id"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="content"    column="content"    />
+        <result property="icon"    column="icon"    />
+        <result property="parentMessageId"    column="parent_message_id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectHotelMessageVo">
+        select message_id, hotel_id, hotel_name, hotel_user_id, nickname, content, icon, parent_message_id, create_by, create_time, update_by, update_time, del_flag from hotel_message
+    </sql>
+
+    <select id="selectHotelMessageList" parameterType="HotelMessage" resultMap="HotelMessageResult">
+        <include refid="selectHotelMessageVo"/>
+        <where>  
+            <if test="hotelName != null  and hotelName != ''"> and hotel_name like concat('%', #{hotelName}, '%')</if>
+            <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectHotelMessageById" parameterType="Long" resultMap="HotelMessageResult">
+        <include refid="selectHotelMessageVo"/>
+        where message_id = #{messageId}
+    </select>
+        
+    <insert id="insertHotelMessage" parameterType="HotelMessage" useGeneratedKeys="true" keyProperty="messageId">
+        insert into hotel_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null">hotel_id,</if>
+            <if test="hotelName != null">hotel_name,</if>
+            <if test="hotelUserId != null">hotel_user_id,</if>
+            <if test="nickname != null">nickname,</if>
+            <if test="content != null">content,</if>
+            <if test="icon != null">icon,</if>
+            <if test="parentMessageId != null">parent_message_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hotelId != null">#{hotelId},</if>
+            <if test="hotelName != null">#{hotelName},</if>
+            <if test="hotelUserId != null">#{hotelUserId},</if>
+            <if test="nickname != null">#{nickname},</if>
+            <if test="content != null">#{content},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="parentMessageId != null">#{parentMessageId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHotelMessage" parameterType="HotelMessage">
+        update hotel_message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hotelId != null">hotel_id = #{hotelId},</if>
+            <if test="hotelName != null">hotel_name = #{hotelName},</if>
+            <if test="hotelUserId != null">hotel_user_id = #{hotelUserId},</if>
+            <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="parentMessageId != null">parent_message_id = #{parentMessageId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where message_id = #{messageId}
+    </update>
+
+    <delete id="deleteHotelMessageById" parameterType="Long">
+        delete from hotel_message where message_id = #{messageId}
+    </delete>
+
+    <delete id="deleteHotelMessageByIds" parameterType="String">
+        delete from hotel_message where message_id in 
+        <foreach item="messageId" collection="array" open="(" separator="," close=")">
+            #{messageId}
+        </foreach>
+    </delete>
+</mapper>
