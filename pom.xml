@@ -39,6 +39,7 @@
         <module>hotel-quartz</module>
         <module>hotel-generator</module>
         <module>hotel-common</module>
+        <module>hotel-wineshop</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -193,6 +194,13 @@
             <dependency>
                 <groupId>edu.fdzc.hotel</groupId>
                 <artifactId>hotel-system</artifactId>
+                <version>${hotel.version}</version>
+            </dependency>
+
+            <!-- 酒店模块-->
+            <dependency>
+                <groupId>edu.fdzc.hotel</groupId>
+                <artifactId>hotel-wineshop</artifactId>
                 <version>${hotel.version}</version>
             </dependency>
 

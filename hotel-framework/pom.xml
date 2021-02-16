@@ -59,6 +59,12 @@
             <artifactId>hotel-system</artifactId>
         </dependency>
 
+        <!-- 酒店模块-->
+        <dependency>
+            <groupId>edu.fdzc.hotel</groupId>
+            <artifactId>hotel-wineshop</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
