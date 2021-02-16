@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelCheckInMapper">
+    
+    <resultMap type="HotelCheckIn" id="HotelCheckInResult">
+        <result property="checkInId"    column="check_in_id"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="roomNumber"    column="room_number"    />
+        <result property="hotelId"    column="hotel_id"    />
+        <result property="roomTypeId"    column="room_type_id"    />
+        <result property="hotelName"    column="hotel_name"    />
+        <result property="perCount"    column="per_count"    />
+        <result property="persons"    column="persons"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="checkInTime"    column="check_in_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectHotelCheckInVo">
+        select check_in_id, menu_name, room_number, hotel_id, room_type_id, hotel_name, per_count, persons, id_card, check_in_time, create_by, create_time, update_by, update_time, status, remark, del_flag from hotel_check_in
+    </sql>
+
+    <select id="selectHotelCheckInList" parameterType="HotelCheckIn" resultMap="HotelCheckInResult">
+        <include refid="selectHotelCheckInVo"/>
+        <where>  
+            <if test="menuName != null  and menuName != ''"> and menu_name = #{menuName}</if>
+            <if test="roomNumber != null  and roomNumber != ''"> and room_number = #{roomNumber}</if>
+            <if test="hotelName != null  and hotelName != ''"> and hotel_name like concat('%', #{hotelName}, '%')</if>
+            <if test="perCount != null "> and per_count = #{perCount}</if>
+            <if test="persons != null  and persons != ''"> and persons like concat('%', #{persons}, '%')</if>
+            <if test="checkInTime != null "> and check_in_time = #{checkInTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectHotelCheckInById" parameterType="Long" resultMap="HotelCheckInResult">
+        <include refid="selectHotelCheckInVo"/>
+        where check_in_id = #{checkInId}
+    </select>
+        
+    <insert id="insertHotelCheckIn" parameterType="HotelCheckIn" useGeneratedKeys="true" keyProperty="checkInId">
+        insert into hotel_check_in
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">menu_name,</if>
+            <if test="roomNumber != null">room_number,</if>
+            <if test="hotelId != null">hotel_id,</if>
+            <if test="roomTypeId != null">room_type_id,</if>
+            <if test="hotelName != null">hotel_name,</if>
+            <if test="perCount != null">per_count,</if>
+            <if test="persons != null">persons,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="checkInTime != null">check_in_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null">#{menuName},</if>
+            <if test="roomNumber != null">#{roomNumber},</if>
+            <if test="hotelId != null">#{hotelId},</if>
+            <if test="roomTypeId != null">#{roomTypeId},</if>
+            <if test="hotelName != null">#{hotelName},</if>
+            <if test="perCount != null">#{perCount},</if>
+            <if test="persons != null">#{persons},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="checkInTime != null">#{checkInTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHotelCheckIn" parameterType="HotelCheckIn">
+        update hotel_check_in
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuName != null">menu_name = #{menuName},</if>
+            <if test="roomNumber != null">room_number = #{roomNumber},</if>
+            <if test="hotelId != null">hotel_id = #{hotelId},</if>
+            <if test="roomTypeId != null">room_type_id = #{roomTypeId},</if>
+            <if test="hotelName != null">hotel_name = #{hotelName},</if>
+            <if test="perCount != null">per_count = #{perCount},</if>
+            <if test="persons != null">persons = #{persons},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="checkInTime != null">check_in_time = #{checkInTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where check_in_id = #{checkInId}
+    </update>
+
+    <delete id="deleteHotelCheckInById" parameterType="Long">
+        delete from hotel_check_in where check_in_id = #{checkInId}
+    </delete>
+
+    <delete id="deleteHotelCheckInByIds" parameterType="String">
+        delete from hotel_check_in where check_in_id in 
+        <foreach item="checkInId" collection="array" open="(" separator="," close=")">
+            #{checkInId}
+        </foreach>
+    </delete>
+</mapper>
