@@ -64,7 +64,6 @@ public class HotelWineshopServiceImpl implements IHotelWineshopService {
      */
     @Override
     public int insertHotelWineshop(HotelWineshop hotelWineshop) {
-        hotelWineshop.setCreateTime(DateUtils.getNowDate());
         return hotelWineshopMapper.insertHotelWineshop(hotelWineshop);
     }
 
@@ -86,7 +85,6 @@ public class HotelWineshopServiceImpl implements IHotelWineshopService {
      */
     @Override
     public int updateHotelWineshop(HotelWineshop hotelWineshop) {
-        hotelWineshop.setUpdateTime(DateUtils.getNowDate());
         return hotelWineshopMapper.updateHotelWineshop(hotelWineshop);
     }
 

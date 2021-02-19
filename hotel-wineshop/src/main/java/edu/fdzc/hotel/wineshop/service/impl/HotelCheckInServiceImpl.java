@@ -53,7 +53,6 @@ public class HotelCheckInServiceImpl implements IHotelCheckInService
     @Override
     public int insertHotelCheckIn(HotelCheckIn hotelCheckIn)
     {
-        hotelCheckIn.setCreateTime(DateUtils.getNowDate());
         return hotelCheckInMapper.insertHotelCheckIn(hotelCheckIn);
     }
 
@@ -66,7 +65,6 @@ public class HotelCheckInServiceImpl implements IHotelCheckInService
     @Override
     public int updateHotelCheckIn(HotelCheckIn hotelCheckIn)
     {
-        hotelCheckIn.setUpdateTime(DateUtils.getNowDate());
         return hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn);
     }
 

@@ -53,7 +53,6 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService
     @Override
     public int insertHotelOrders(HotelOrders hotelOrders)
     {
-        hotelOrders.setCreateTime(DateUtils.getNowDate());
         return hotelOrdersMapper.insertHotelOrders(hotelOrders);
     }
 
@@ -66,7 +65,6 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService
     @Override
     public int updateHotelOrders(HotelOrders hotelOrders)
     {
-        hotelOrders.setUpdateTime(DateUtils.getNowDate());
         return hotelOrdersMapper.updateHotelOrders(hotelOrders);
     }
 

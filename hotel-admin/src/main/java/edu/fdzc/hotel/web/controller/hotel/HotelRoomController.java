@@ -88,9 +88,6 @@ public class HotelRoomController extends BaseController {
     @Log(title = "房间管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HotelRoom hotelRoom) {
-        if (UserConstants.NOT_UNIQUE.equals(hotelRoomService.checkRoomNameUnique(hotelRoom.getHotelId(), hotelRoom.getNumber()))) {
-            return AjaxResult.error("修改房间'" + hotelRoom.getNumber() + "'失败，此酒店的房间已存在");
-        }
         hotelRoom.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(hotelRoomService.updateHotelRoom(hotelRoom));
     }

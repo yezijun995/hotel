@@ -62,7 +62,6 @@ public class HotelRoomTypeServiceImpl implements IHotelRoomTypeService {
      */
     @Override
     public int insertHotelRoomType(HotelRoomType hotelRoomType) {
-        hotelRoomType.setCreateTime(DateUtils.getNowDate());
         return hotelRoomTypeMapper.insertHotelRoomType(hotelRoomType);
     }
 
@@ -74,7 +73,6 @@ public class HotelRoomTypeServiceImpl implements IHotelRoomTypeService {
      */
     @Override
     public int updateHotelRoomType(HotelRoomType hotelRoomType) {
-        hotelRoomType.setUpdateTime(DateUtils.getNowDate());
         return hotelRoomTypeMapper.updateHotelRoomType(hotelRoomType);
     }
 

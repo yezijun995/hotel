@@ -53,7 +53,6 @@ public class HotelMessageServiceImpl implements IHotelMessageService
     @Override
     public int insertHotelMessage(HotelMessage hotelMessage)
     {
-        hotelMessage.setCreateTime(DateUtils.getNowDate());
         return hotelMessageMapper.insertHotelMessage(hotelMessage);
     }
 
@@ -66,7 +65,6 @@ public class HotelMessageServiceImpl implements IHotelMessageService
     @Override
     public int updateHotelMessage(HotelMessage hotelMessage)
     {
-        hotelMessage.setUpdateTime(DateUtils.getNowDate());
         return hotelMessageMapper.updateHotelMessage(hotelMessage);
     }
 
