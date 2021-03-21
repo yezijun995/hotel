@@ -59,4 +59,6 @@ public interface HotelCheckInMapper
      * @return 结果
      */
     public int deleteHotelCheckInByIds(Long[] checkInIds);
+
+    int cancelCheckIn(Long orderId);
 }

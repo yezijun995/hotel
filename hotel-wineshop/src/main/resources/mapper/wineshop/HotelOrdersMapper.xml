@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelOrdersMapper">
-    
+
     <resultMap type="HotelOrders" id="HotelOrdersResult">
         <result property="ordersId"    column="orders_id"    />
         <result property="ordersTypeId"    column="orders_type_id"    />
@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="roomTypeId"    column="room_type_id"    />
         <result property="roomTypeName"    column="room_type_name"    />
         <result property="roomId"    column="room_id"    />
+        <result property="number"    column="number"    />
         <result property="numOfRoom"    column="num_of_room"    />
         <result property="orderDays"    column="order_days"    />
         <result property="orderDate"    column="order_date"    />
@@ -29,28 +30,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectHotelOrdersVo">
-        select orders_id, orders_type_id, user_id, username, phone, hotel_id, room_type_id, room_type_name, room_id, num_of_room, order_days, order_date, order_state, order_cost, create_by, create_time, update_by, update_time, status, remark, del_flag from hotel_orders
+        select orders_id, orders_type_id, user_id, username, phone, hotel_id, room_type_id, room_type_name, room_id, number, num_of_room, order_days, order_date, order_state, order_cost, create_by, create_time, update_by, update_time, status, remark, del_flag from hotel_orders
     </sql>
 
     <select id="selectHotelOrdersList" parameterType="HotelOrders" resultMap="HotelOrdersResult">
         <include refid="selectHotelOrdersVo"/>
-        <where>  
-            <if test="ordersTypeId != null "> and orders_type_id = #{ordersTypeId}</if>
-            <if test="userId != null "> and user_id = #{userId}</if>
+        <where>
             <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
             <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
             <if test="roomTypeName != null  and roomTypeName != ''"> and room_type_name like concat('%', #{roomTypeName}, '%')</if>
+            <if test="number != null  and number != ''"> and number = #{number}</if>
             <if test="numOfRoom != null "> and num_of_room = #{numOfRoom}</if>
             <if test="orderDate != null "> and order_date = #{orderDate}</if>
             <if test="orderState != null  and orderState != ''"> and order_state = #{orderState}</if>
         </where>
     </select>
-    
+
     <select id="selectHotelOrdersById" parameterType="Long" resultMap="HotelOrdersResult">
         <include refid="selectHotelOrdersVo"/>
         where orders_id = #{ordersId}
     </select>
-        
+
     <insert id="insertHotelOrders" parameterType="HotelOrders">
         insert into hotel_orders
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -63,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="roomTypeId != null">room_type_id,</if>
             <if test="roomTypeName != null">room_type_name,</if>
             <if test="roomId != null">room_id,</if>
+            <if test="number != null">number,</if>
             <if test="numOfRoom != null">num_of_room,</if>
             <if test="orderDays != null">order_days,</if>
             <if test="orderDate != null">order_date,</if>
@@ -75,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
             <if test="delFlag != null">del_flag,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ordersId != null">#{ordersId},</if>
             <if test="ordersTypeId != null">#{ordersTypeId},</if>
@@ -86,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="roomTypeId != null">#{roomTypeId},</if>
             <if test="roomTypeName != null">#{roomTypeName},</if>
             <if test="roomId != null">#{roomId},</if>
+            <if test="number != null">#{number},</if>
             <if test="numOfRoom != null">#{numOfRoom},</if>
             <if test="orderDays != null">#{orderDays},</if>
             <if test="orderDate != null">#{orderDate},</if>
@@ -98,7 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
             <if test="delFlag != null">#{delFlag},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateHotelOrders" parameterType="HotelOrders">
@@ -112,6 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="roomTypeId != null">room_type_id = #{roomTypeId},</if>
             <if test="roomTypeName != null">room_type_name = #{roomTypeName},</if>
             <if test="roomId != null">room_id = #{roomId},</if>
+            <if test="number != null">number = #{number},</if>
             <if test="numOfRoom != null">num_of_room = #{numOfRoom},</if>
             <if test="orderDays != null">order_days = #{orderDays},</if>
             <if test="orderDate != null">order_date = #{orderDate},</if>
@@ -133,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteHotelOrdersByIds" parameterType="String">
-        delete from hotel_orders where orders_id in 
+        delete from hotel_orders where orders_id in
         <foreach item="ordersId" collection="array" open="(" separator="," close=")">
             #{ordersId}
         </foreach>

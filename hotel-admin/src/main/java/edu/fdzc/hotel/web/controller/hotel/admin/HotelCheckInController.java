@@ -16,14 +16,13 @@ import java.util.List;
 
 /**
  * 入住退房登记管理Controller
- * 
+ *
  * @author yifelix
  * @date 2021-02-16
  */
 @RestController
 @RequestMapping("/hotel/checkIn")
-public class HotelCheckInController extends BaseController
-{
+public class HotelCheckInController extends BaseController {
     @Autowired
     private IHotelCheckInService hotelCheckInService;
 
@@ -32,8 +31,7 @@ public class HotelCheckInController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HotelCheckIn hotelCheckIn)
-    {
+    public TableDataInfo list(HotelCheckIn hotelCheckIn) {
         startPage();
         List<HotelCheckIn> list = hotelCheckInService.selectHotelCheckInList(hotelCheckIn);
         return getDataTable(list);
@@ -45,11 +43,17 @@ public class HotelCheckInController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:export')")
     @Log(title = "入住退房登记管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(HotelCheckIn hotelCheckIn)
-    {
+    public AjaxResult export(HotelCheckIn hotelCheckIn) {
         List<HotelCheckIn> list = hotelCheckInService.selectHotelCheckInList(hotelCheckIn);
         ExcelUtil<HotelCheckIn> util = new ExcelUtil<HotelCheckIn>(HotelCheckIn.class);
         return util.exportExcel(list, "checkIn");
+    }
+
+    @PreAuthorize("@ss.hasPermi('hotel:checkIn:chekIn')")
+    @Log(title = "入住退房登记管理", businessType = BusinessType.UPDATE)
+    @PutMapping("/in")
+    public AjaxResult checkIn(@RequestBody HotelCheckIn hotelCheckIn) {
+        return toAjax(hotelCheckInService.checkIn(hotelCheckIn));
     }
 
     /**
@@ -57,8 +61,7 @@ public class HotelCheckInController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:query')")
     @GetMapping(value = "/{checkInId}")
-    public AjaxResult getInfo(@PathVariable("checkInId") Long checkInId)
-    {
+    public AjaxResult getInfo(@PathVariable("checkInId") Long checkInId) {
         return AjaxResult.success(hotelCheckInService.selectHotelCheckInById(checkInId));
     }
 
@@ -68,8 +71,7 @@ public class HotelCheckInController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:add')")
     @Log(title = "入住退房登记管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HotelCheckIn hotelCheckIn)
-    {
+    public AjaxResult add(@RequestBody HotelCheckIn hotelCheckIn) {
         return toAjax(hotelCheckInService.insertHotelCheckIn(hotelCheckIn));
     }
 
@@ -79,8 +81,7 @@ public class HotelCheckInController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:edit')")
     @Log(title = "入住退房登记管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HotelCheckIn hotelCheckIn)
-    {
+    public AjaxResult edit(@RequestBody HotelCheckIn hotelCheckIn) {
         return toAjax(hotelCheckInService.updateHotelCheckIn(hotelCheckIn));
     }
 
@@ -89,9 +90,8 @@ public class HotelCheckInController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:checkIn:remove')")
     @Log(title = "入住退房登记管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{checkInIds}")
-    public AjaxResult remove(@PathVariable Long[] checkInIds)
-    {
+    @DeleteMapping("/{checkInIds}")
+    public AjaxResult remove(@PathVariable Long[] checkInIds) {
         return toAjax(hotelCheckInService.deleteHotelCheckInByIds(checkInIds));
     }
 }

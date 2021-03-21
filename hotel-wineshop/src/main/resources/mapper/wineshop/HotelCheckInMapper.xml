@@ -5,23 +5,23 @@
 <mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelCheckInMapper">
 
     <resultMap type="HotelCheckIn" id="HotelCheckInResult">
-        <result property="checkInId"    column="check_in_id"    />
-        <result property="ordersId"    column="orders_id"    />
-        <result property="roomNumber"    column="room_number"    />
-        <result property="hotelId"    column="hotel_id"    />
-        <result property="roomTypeId"    column="room_type_id"    />
-        <result property="hotelName"    column="hotel_name"    />
-        <result property="perCount"    column="per_count"    />
-        <result property="persons"    column="persons"    />
-        <result property="idCard"    column="id_card"    />
-        <result property="checkInTime"    column="check_in_time"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="status"    column="status"    />
-        <result property="remark"    column="remark"    />
-        <result property="delFlag"    column="del_flag"    />
+        <result property="checkInId" column="check_in_id"/>
+        <result property="ordersId" column="orders_id"/>
+        <result property="roomNumber" column="room_number"/>
+        <result property="hotelId" column="hotel_id"/>
+        <result property="roomTypeId" column="room_type_id"/>
+        <result property="hotelName" column="hotel_name"/>
+        <result property="perCount" column="per_count"/>
+        <result property="persons" column="persons"/>
+        <result property="idCard" column="id_card"/>
+        <result property="checkInTime" column="check_in_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="delFlag" column="del_flag"/>
     </resultMap>
 
     <sql id="selectHotelCheckInVo">
@@ -31,12 +31,12 @@
     <select id="selectHotelCheckInList" parameterType="HotelCheckIn" resultMap="HotelCheckInResult">
         <include refid="selectHotelCheckInVo"/>
         <where>
-            <if test="ordersId != null "> and orders_id = #{ordersId}</if>
-            <if test="roomNumber != null  and roomNumber != ''"> and room_number = #{roomNumber}</if>
-            <if test="hotelName != null  and hotelName != ''"> and hotel_name like concat('%', #{hotelName}, '%')</if>
-            <if test="perCount != null "> and per_count = #{perCount}</if>
-            <if test="persons != null  and persons != ''"> and persons like concat('%', #{persons}, '%')</if>
-            <if test="checkInTime != null "> and check_in_time = #{checkInTime}</if>
+            <if test="ordersId != null ">and orders_id = #{ordersId}</if>
+            <if test="roomNumber != null  and roomNumber != ''">and room_number = #{roomNumber}</if>
+            <if test="hotelName != null  and hotelName != ''">and hotel_name like concat('%', #{hotelName}, '%')</if>
+            <if test="perCount != null ">and per_count = #{perCount}</if>
+            <if test="persons != null  and persons != ''">and persons like concat('%', #{persons}, '%')</if>
+            <if test="checkInTime != null ">and check_in_time = #{checkInTime}</if>
         </where>
     </select>
 
@@ -118,4 +118,8 @@
             #{checkInId}
         </foreach>
     </delete>
+
+    <update id="cancelCheckIn" parameterType="Long">
+        UPDATE hotel_check_in SET `status` = "-1"  WHERE orders_id = #{orderId}
+    </update>
 </mapper>

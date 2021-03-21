@@ -1,11 +1,13 @@
 package edu.fdzc.hotel.wineshop.service.impl;
 
 import edu.fdzc.hotel.common.enums.OrderStatus;
+import edu.fdzc.hotel.common.utils.bean.BeanUtils;
 import edu.fdzc.hotel.wineshop.domain.HotelCheckIn;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
 import edu.fdzc.hotel.wineshop.domain.HotelRoom;
 import edu.fdzc.hotel.wineshop.mapper.HotelOrdersMapper;
 import edu.fdzc.hotel.wineshop.mapper.HotelRoomMapper;
+import edu.fdzc.hotel.wineshop.service.IHotelCheckInService;
 import edu.fdzc.hotel.wineshop.service.IHotelOrdersService;
 import edu.fdzc.hotel.wineshop.service.IHotelRoomService;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,9 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
 
     @Resource
     private HotelRoomMapper hotelRoomMapper;
+
+    @Resource
+    private IHotelCheckInService checkInService;
 
     /**
      * 查询订单管理
@@ -63,6 +68,13 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
      */
     @Override
     public int insertHotelOrders(HotelOrders hotelOrders) {
+        List<HotelRoom> hotelRooms = hotelRoomMapper.selectHotelRoomByTypeId(hotelOrders.getRoomTypeId());
+        //下单的房间
+        HotelRoom hotelRoom = hotelRooms.get(0);
+        hotelRoom.setStatus("0");
+        hotelRoomService.updateHotelRoom(hotelRoom);
+        hotelOrders.setRoomId(hotelRoom.getRoomId());
+        hotelOrders.setNumber(hotelRoom.getNumber());
         return hotelOrdersMapper.insertHotelOrders(hotelOrders);
     }
 
@@ -121,29 +133,24 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
         if (Objects.isNull(orders) || !Objects.equals(orders.getOrderState(), OrderStatus.UNPAID.getCode() + "")) {
             return -3;
         }
-
-        List<HotelRoom> hotelRooms = hotelRoomMapper.selectHotelRoomByTypeId(orders.getRoomTypeId());
-        //下单的房间
-        HotelRoom hotelRoom = hotelRooms.get(0);
-        hotelRoom.setStatus("0");
-        hotelRoomMapper.updateHotelRoom(hotelRoom);
-
-        orders.setRoomId(hotelRoom.getRoomId());
-        orders.setNumOfRoom(Long.valueOf(hotelRoom.getNumber()));
         orders.setOrderState(OrderStatus.PAID.getCode() + "");
         if (!Objects.equals(hotelOrdersMapper.updateHotelOrders(orders), 1)) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return 0;
         }
         //下单到流水表
-
+        if (!Objects.equals(this.addCheckIn(orders), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
         return 1;
     }
 
-    private int addCheckIn(HotelOrders orders){
-        HotelCheckIn hotelCheckIn = new HotelCheckIn();
-//        hotelCheckIn.setMenuName();
-        return 1;
+    private int addCheckIn(HotelOrders orders) {
+        HotelCheckIn hotelCheckIn = BeanUtils.convertObject(orders, HotelCheckIn.class);
+        hotelCheckIn.setRoomNumber(orders.getNumber());
+        hotelCheckIn.setStatus(OrderStatus.PAID.getCode() + "");
+        return checkInService.insertHotelCheckIn(hotelCheckIn);
     }
 
     /**
@@ -155,6 +162,7 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
      * @return
      */
     @Override
+    @Transactional
     public int cancelOrder(Long orderId) {
         HotelOrders orders = hotelOrdersMapper.selectHotelOrdersById(orderId);
         if (Objects.isNull(orders)) {
@@ -165,6 +173,17 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return -2;
         }
+
+        //如果已经支付订单，取消订单
+        checkInService.cancelCheckIn(orders.getOrdersId());
+
+        HotelRoom hotelRoom = hotelRoomService.selectHotelRoomById(orders.getRoomId());
+        hotelRoom.setStatus("1");
+        if (!Objects.equals(hotelRoomMapper.updateHotelRoom(hotelRoom), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
         return 1;
     }
+
 }
