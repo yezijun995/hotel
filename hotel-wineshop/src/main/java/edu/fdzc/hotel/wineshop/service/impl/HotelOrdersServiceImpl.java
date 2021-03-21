@@ -1,6 +1,7 @@
 package edu.fdzc.hotel.wineshop.service.impl;
 
 import edu.fdzc.hotel.common.enums.OrderStatus;
+import edu.fdzc.hotel.wineshop.domain.HotelCheckIn;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
 import edu.fdzc.hotel.wineshop.domain.HotelRoom;
 import edu.fdzc.hotel.wineshop.mapper.HotelOrdersMapper;
@@ -134,20 +135,15 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return 0;
         }
+        //下单到流水表
+
         return 1;
-//        if (Objects.isNull(orders) | order.getOrderStatus() != OrderStatus.UNPAID.getCode()) {
-//            return -3;
-//        }
-//        if (roomTypeService.updateRest(order.getRoomTypeId(), -1) != 1) {
-//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-//            return -2;
-//        }
-//        order.setOrderStatus(OrderStatus.PAID.getCode());
-//        if (orderMapper.updateByPrimaryKeySelective(order) != 1) {
-//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-//            return 0;
-//        }
-//        return 1;
+    }
+
+    private int addCheckIn(HotelOrders orders){
+        HotelCheckIn hotelCheckIn = new HotelCheckIn();
+//        hotelCheckIn.setMenuName();
+        return 1;
     }
 
     /**

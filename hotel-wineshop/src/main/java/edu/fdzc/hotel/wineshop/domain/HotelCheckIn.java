@@ -1,17 +1,17 @@
 package edu.fdzc.hotel.wineshop.domain;
-
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import edu.fdzc.hotel.common.annotation.Excel;
 import edu.fdzc.hotel.common.core.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.Date;
 
 /**
  * 入住退房登记管理对象 hotel_check_in
- * 
+ *
  * @author yifelix
- * @date 2021-02-16
+ * @date 2021-03-21
  */
 public class HotelCheckIn extends BaseEntity
 {
@@ -22,7 +22,7 @@ public class HotelCheckIn extends BaseEntity
 
     /** 订单号 */
     @Excel(name = "订单号")
-    private String menuName;
+    private Long ordersId;
 
     /** 房间号 */
     @Excel(name = "房间号")
@@ -62,111 +62,111 @@ public class HotelCheckIn extends BaseEntity
     /** 是否删除 */
     private String delFlag;
 
-    public void setCheckInId(Long checkInId) 
+    public void setCheckInId(Long checkInId)
     {
         this.checkInId = checkInId;
     }
 
-    public Long getCheckInId() 
+    public Long getCheckInId()
     {
         return checkInId;
     }
-    public void setMenuName(String menuName) 
+    public void setOrdersId(Long ordersId)
     {
-        this.menuName = menuName;
+        this.ordersId = ordersId;
     }
 
-    public String getMenuName() 
+    public Long getOrdersId()
     {
-        return menuName;
+        return ordersId;
     }
-    public void setRoomNumber(String roomNumber) 
+    public void setRoomNumber(String roomNumber)
     {
         this.roomNumber = roomNumber;
     }
 
-    public String getRoomNumber() 
+    public String getRoomNumber()
     {
         return roomNumber;
     }
-    public void setHotelId(Long hotelId) 
+    public void setHotelId(Long hotelId)
     {
         this.hotelId = hotelId;
     }
 
-    public Long getHotelId() 
+    public Long getHotelId()
     {
         return hotelId;
     }
-    public void setRoomTypeId(Long roomTypeId) 
+    public void setRoomTypeId(Long roomTypeId)
     {
         this.roomTypeId = roomTypeId;
     }
 
-    public Long getRoomTypeId() 
+    public Long getRoomTypeId()
     {
         return roomTypeId;
     }
-    public void setHotelName(String hotelName) 
+    public void setHotelName(String hotelName)
     {
         this.hotelName = hotelName;
     }
 
-    public String getHotelName() 
+    public String getHotelName()
     {
         return hotelName;
     }
-    public void setPerCount(Long perCount) 
+    public void setPerCount(Long perCount)
     {
         this.perCount = perCount;
     }
 
-    public Long getPerCount() 
+    public Long getPerCount()
     {
         return perCount;
     }
-    public void setPersons(String persons) 
+    public void setPersons(String persons)
     {
         this.persons = persons;
     }
 
-    public String getPersons() 
+    public String getPersons()
     {
         return persons;
     }
-    public void setIdCard(String idCard) 
+    public void setIdCard(String idCard)
     {
         this.idCard = idCard;
     }
 
-    public String getIdCard() 
+    public String getIdCard()
     {
         return idCard;
     }
-    public void setCheckInTime(Date checkInTime) 
+    public void setCheckInTime(Date checkInTime)
     {
         this.checkInTime = checkInTime;
     }
 
-    public Date getCheckInTime() 
+    public Date getCheckInTime()
     {
         return checkInTime;
     }
-    public void setStatus(String status) 
+    public void setStatus(String status)
     {
         this.status = status;
     }
 
-    public String getStatus() 
+    public String getStatus()
     {
         return status;
     }
-    public void setDelFlag(String delFlag) 
+    public void setDelFlag(String delFlag)
     {
         this.delFlag = delFlag;
     }
 
-    public String getDelFlag() 
+    public String getDelFlag()
     {
         return delFlag;
     }
@@ -174,23 +174,23 @@ public class HotelCheckIn extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("checkInId", getCheckInId())
-            .append("menuName", getMenuName())
-            .append("roomNumber", getRoomNumber())
-            .append("hotelId", getHotelId())
-            .append("roomTypeId", getRoomTypeId())
-            .append("hotelName", getHotelName())
-            .append("perCount", getPerCount())
-            .append("persons", getPersons())
-            .append("idCard", getIdCard())
-            .append("checkInTime", getCheckInTime())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("status", getStatus())
-            .append("remark", getRemark())
-            .append("delFlag", getDelFlag())
-            .toString();
+                .append("checkInId", getCheckInId())
+                .append("ordersId", getOrdersId())
+                .append("roomNumber", getRoomNumber())
+                .append("hotelId", getHotelId())
+                .append("roomTypeId", getRoomTypeId())
+                .append("hotelName", getHotelName())
+                .append("perCount", getPerCount())
+                .append("persons", getPersons())
+                .append("idCard", getIdCard())
+                .append("checkInTime", getCheckInTime())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("status", getStatus())
+                .append("remark", getRemark())
+                .append("delFlag", getDelFlag())
+                .toString();
     }
 }
