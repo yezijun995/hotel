@@ -1,15 +1,14 @@
 package edu.fdzc.hotel.wineshop.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import edu.fdzc.hotel.common.core.domain.TreeSelect;
-import edu.fdzc.hotel.common.utils.DateUtils;
 import edu.fdzc.hotel.wineshop.domain.HotelRoomType;
 import edu.fdzc.hotel.wineshop.mapper.HotelRoomTypeMapper;
 import edu.fdzc.hotel.wineshop.service.IHotelRoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 房间类型Service业务层处理
@@ -96,5 +95,10 @@ public class HotelRoomTypeServiceImpl implements IHotelRoomTypeService {
     @Override
     public int deleteHotelRoomTypeById(Long roomTypeId) {
         return hotelRoomTypeMapper.deleteHotelRoomTypeById(roomTypeId);
+    }
+
+    @Override
+    public List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId) {
+        return hotelRoomTypeMapper.getBookableRoomTypeByHotelId(hotelId);
     }
 }

@@ -1,25 +1,18 @@
-package edu.fdzc.hotel.web.controller.hotel;
+package edu.fdzc.hotel.web.controller.hotel.admin;
 
-import java.util.List;
-
-import edu.fdzc.hotel.wineshop.domain.HotelOrders;
-import edu.fdzc.hotel.wineshop.service.IHotelOrdersService;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import edu.fdzc.hotel.common.annotation.Log;
 import edu.fdzc.hotel.common.core.controller.BaseController;
 import edu.fdzc.hotel.common.core.domain.AjaxResult;
+import edu.fdzc.hotel.common.core.page.TableDataInfo;
 import edu.fdzc.hotel.common.enums.BusinessType;
 import edu.fdzc.hotel.common.utils.poi.ExcelUtil;
-import edu.fdzc.hotel.common.core.page.TableDataInfo;
+import edu.fdzc.hotel.wineshop.domain.HotelOrders;
+import edu.fdzc.hotel.wineshop.service.IHotelOrdersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 订单管理Controller

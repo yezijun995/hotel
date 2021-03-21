@@ -20,7 +20,7 @@ public class LoginBody
     /**
      * 验证码
      */
-    private String code;
+//    private String code;
 
     /**
      * 唯一标识
@@ -47,15 +47,15 @@ public class LoginBody
         this.password = password;
     }
 
-    public String getCode()
-    {
-        return code;
-    }
-
-    public void setCode(String code)
-    {
-        this.code = code;
-    }
+//    public String getCode()
+//    {
+//        return code;
+//    }
+//
+//    public void setCode(String code)
+//    {
+//        this.code = code;
+//    }
 
     public String getUuid()
     {

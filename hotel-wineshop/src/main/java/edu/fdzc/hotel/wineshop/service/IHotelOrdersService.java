@@ -1,7 +1,8 @@
 package edu.fdzc.hotel.wineshop.service;
 
-import java.util.List;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
+
+import java.util.List;
 
 /**
  * 订单管理Service接口
@@ -58,4 +59,25 @@ public interface IHotelOrdersService
      * @return 结果
      */
     public int deleteHotelOrdersById(Long ordersId);
+
+    /**
+     * 根据用户Id查询订单
+     * @param userId
+     * @return
+     */
+    List<HotelOrders> getAllOrderByUser(Long userId);
+
+    /**
+     * 支付订单
+     * @param orderId
+     * @return
+     */
+    int payOrder(Long orderId);
+
+    /**
+     * 取消订单
+     * @param orderId
+     * @return
+     */
+    int cancelOrder(Long orderId);
 }

@@ -138,4 +138,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{ordersId}
         </foreach>
     </delete>
+
+    <select id="getAllOrderByUser" parameterType="Long" resultMap="HotelOrdersResult">
+        <include refid="selectHotelOrdersVo"/>
+        where user_id = #{userId}
+    </select>
 </mapper>

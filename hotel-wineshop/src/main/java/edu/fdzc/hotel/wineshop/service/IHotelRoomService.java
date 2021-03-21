@@ -1,19 +1,19 @@
 package edu.fdzc.hotel.wineshop.service;
 
-import java.util.List;
 import edu.fdzc.hotel.wineshop.domain.HotelRoom;
+
+import java.util.List;
 
 /**
  * 房间管理Service接口
- * 
+ *
  * @author yifelix
  * @date 2021-02-13
  */
-public interface IHotelRoomService 
-{
+public interface IHotelRoomService {
     /**
      * 查询房间管理
-     * 
+     *
      * @param roomId 房间管理ID
      * @return 房间管理
      */
@@ -21,7 +21,7 @@ public interface IHotelRoomService
 
     /**
      * 查询房间管理列表
-     * 
+     *
      * @param hotelRoom 房间管理
      * @return 房间管理集合
      */
@@ -29,7 +29,7 @@ public interface IHotelRoomService
 
     /**
      * 新增房间管理
-     * 
+     *
      * @param hotelRoom 房间管理
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IHotelRoomService
 
     /**
      * 修改房间管理
-     * 
+     *
      * @param hotelRoom 房间管理
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IHotelRoomService
 
     /**
      * 批量删除房间管理
-     * 
+     *
      * @param roomIds 需要删除的房间管理ID
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface IHotelRoomService
 
     /**
      * 删除房间管理信息
-     * 
+     *
      * @param roomId 房间管理ID
      * @return 结果
      */
@@ -61,9 +61,10 @@ public interface IHotelRoomService
 
     /**
      * 检测酒店下的房间是否是唯一
+     *
      * @param hotelId
      * @param roomName
      * @return
      */
-    String checkRoomNameUnique(Long hotelId,String roomName);
+    String checkRoomNameUnique(Long hotelId, String roomName);
 }

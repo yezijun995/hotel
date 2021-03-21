@@ -1,7 +1,8 @@
 package edu.fdzc.hotel.wineshop.mapper;
 
-import java.util.List;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
+
+import java.util.List;
 
 /**
  * 订单管理Mapper接口
@@ -58,4 +59,11 @@ public interface HotelOrdersMapper
      * @return 结果
      */
     public int deleteHotelOrdersByIds(Long[] ordersIds);
+
+    /**
+     * 根据用户Id查询订单
+     * @param userId
+     * @return
+     */
+    List<HotelOrders> getAllOrderByUser(Long userId);
 }

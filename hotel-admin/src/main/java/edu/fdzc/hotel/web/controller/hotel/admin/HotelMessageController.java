@@ -1,4 +1,4 @@
-package edu.fdzc.hotel.web.controller.hotel;
+package edu.fdzc.hotel.web.controller.hotel.admin;
 
 import java.util.List;
 

@@ -59,4 +59,11 @@ public interface HotelRoomTypeMapper
      * @return 结果
      */
     public int deleteHotelRoomTypeByIds(Long[] roomTypeIds);
+
+    /**
+     * 获取酒店下所有可预订房间类型
+     * @param hotelId
+     * @return
+     */
+    List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId);
 }

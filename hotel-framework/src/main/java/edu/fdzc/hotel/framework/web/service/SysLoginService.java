@@ -4,8 +4,6 @@ import edu.fdzc.hotel.common.constant.Constants;
 import edu.fdzc.hotel.common.core.domain.model.LoginUser;
 import edu.fdzc.hotel.common.core.redis.RedisCache;
 import edu.fdzc.hotel.common.exception.CustomException;
-import edu.fdzc.hotel.common.exception.user.CaptchaException;
-import edu.fdzc.hotel.common.exception.user.CaptchaExpireException;
 import edu.fdzc.hotel.common.exception.user.UserPasswordNotMatchException;
 import edu.fdzc.hotel.common.utils.MessageUtils;
 import edu.fdzc.hotel.framework.manager.AsyncManager;
@@ -45,21 +43,21 @@ public class SysLoginService
      * @param uuid 唯一标识
      * @return 结果
      */
-    public String login(String username, String password, String code, String uuid)
+    public String login(String username, String password, String uuid)
     {
-        String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
-        String captcha = redisCache.getCacheObject(verifyKey);
-        redisCache.deleteObject(verifyKey);
-        if (captcha == null)
-        {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
-            throw new CaptchaExpireException();
-        }
-        if (!code.equalsIgnoreCase(captcha))
-        {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
-            throw new CaptchaException();
-        }
+//        String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
+//        String captcha = redisCache.getCacheObject(verifyKey);
+//        redisCache.deleteObject(verifyKey);
+//        if (captcha == null)
+//        {
+//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
+//            throw new CaptchaExpireException();
+//        }
+//        if (!code.equalsIgnoreCase(captcha))
+//        {
+//            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
+//            throw new CaptchaException();
+//        }
         // 用户验证
         Authentication authentication = null;
         try
@@ -82,6 +80,7 @@ public class SysLoginService
             }
         }
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         // 生成token
         return tokenService.createToken(loginUser);

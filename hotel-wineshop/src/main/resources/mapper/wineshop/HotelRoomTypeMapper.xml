@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelRoomTypeMapper">
-    
+
     <resultMap type="HotelRoomType" id="HotelRoomTypeResult">
-        <result property="roomTypeId"    column="room_type_id"    />
-        <result property="typeName"    column="type_name"    />
-        <result property="area"    column="area"    />
-        <result property="bedNum"    column="bed_num"    />
-        <result property="bedSize"    column="bed_size"    />
-        <result property="window"    column="window"    />
-        <result property="price"    column="price"    />
-        <result property="discount"    column="discount"    />
-        <result property="createor"    column="createor"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updater"    column="updater"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="status"    column="status"    />
-        <result property="remark"    column="remark"    />
-        <result property="delFlag"    column="del_flag"    />
+        <result property="roomTypeId" column="room_type_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="area" column="area"/>
+        <result property="bedNum" column="bed_num"/>
+        <result property="bedSize" column="bed_size"/>
+        <result property="window" column="window"/>
+        <result property="price" column="price"/>
+        <result property="discount" column="discount"/>
+        <result property="createor" column="createor"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="delFlag" column="del_flag"/>
     </resultMap>
 
     <sql id="selectHotelRoomTypeVo">
@@ -28,25 +28,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectHotelRoomTypeList" parameterType="HotelRoomType" resultMap="HotelRoomTypeResult">
         <include refid="selectHotelRoomTypeVo"/>
-        <where>  
-            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
-            <if test="area != null "> and area = #{area}</if>
-            <if test="bedNum != null "> and bed_num = #{bedNum}</if>
-            <if test="bedSize != null "> and bed_size = #{bedSize}</if>
-            <if test="window != null  and window != ''"> and window = #{window}</if>
-            <if test="price != null "> and price = #{price}</if>
-            <if test="discount != null "> and discount = #{discount}</if>
-            <if test="createor != null "> and createor = #{createor}</if>
-            <if test="updater != null "> and updater = #{updater}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
+        <where>
+            <if test="typeName != null  and typeName != ''">and type_name like concat('%', #{typeName}, '%')</if>
+            <if test="area != null ">and area = #{area}</if>
+            <if test="bedNum != null ">and bed_num = #{bedNum}</if>
+            <if test="bedSize != null ">and bed_size = #{bedSize}</if>
+            <if test="window != null  and window != ''">and window = #{window}</if>
+            <if test="price != null ">and price = #{price}</if>
+            <if test="discount != null ">and discount = #{discount}</if>
+            <if test="createor != null ">and createor = #{createor}</if>
+            <if test="updater != null ">and updater = #{updater}</if>
+            <if test="status != null  and status != ''">and status = #{status}</if>
         </where>
     </select>
-    
+
     <select id="selectHotelRoomTypeById" parameterType="Long" resultMap="HotelRoomTypeResult">
         <include refid="selectHotelRoomTypeVo"/>
         where room_type_id = #{roomTypeId}
     </select>
-        
+
     <insert id="insertHotelRoomType" parameterType="HotelRoomType" useGeneratedKeys="true" keyProperty="roomTypeId">
         insert into hotel_room_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
             <if test="delFlag != null">del_flag,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="typeName != null and typeName != ''">#{typeName},</if>
             <if test="area != null">#{area},</if>
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
             <if test="delFlag != null">#{delFlag},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateHotelRoomType" parameterType="HotelRoomType">
@@ -109,9 +109,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteHotelRoomTypeByIds" parameterType="String">
-        delete from hotel_room_type where room_type_id in 
+        delete from hotel_room_type where room_type_id in
         <foreach item="roomTypeId" collection="array" open="(" separator="," close=")">
             #{roomTypeId}
         </foreach>
     </delete>
+
+    <select id="getBookableRoomTypeByHotelId" parameterType="java.lang.Long" resultMap="HotelRoomTypeResult">
+        SELECT type.room_type_id,type.type_name,type.area area, type.bed_num,type.bed_size, type.window window, type.price price, type.discount discount
+        FROM hotel_room room LEFT JOIN hotel_room_type type ON room.type_id = type.room_type_id
+        WHERE room.`status` = 1   and hotel_id = #{hotelId}
+        GROUP BY room_type_id
+    </select>
 </mapper>

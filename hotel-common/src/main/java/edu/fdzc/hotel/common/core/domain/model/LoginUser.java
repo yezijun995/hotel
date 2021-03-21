@@ -1,6 +1,7 @@
 package edu.fdzc.hotel.common.core.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.fdzc.hotel.common.core.domain.entity.SysAccount;
 import edu.fdzc.hotel.common.core.domain.entity.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

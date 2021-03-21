@@ -38,8 +38,11 @@ public class SysUser extends BaseEntity
     private String userName;
 
     /** 用户昵称 */
-    @Excel(name = "用户名称")
+    @Excel(name = "昵称")
     private String nickName;
+
+    @Excel(name = "真实名称")
+    private String realName;
 
     /** 用户邮箱 */
     @Excel(name = "用户邮箱")
@@ -58,6 +61,10 @@ public class SysUser extends BaseEntity
 
     /** 密码 */
     private String password;
+
+    private String address;
+
+    private String idCard;
 
     /** 盐加密 */
     private String salt;
@@ -299,6 +306,30 @@ public class SysUser extends BaseEntity
     public void setPostIds(Long[] postIds)
     {
         this.postIds = postIds;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     @Override

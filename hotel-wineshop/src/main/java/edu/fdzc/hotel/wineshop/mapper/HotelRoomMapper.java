@@ -1,9 +1,9 @@
 package edu.fdzc.hotel.wineshop.mapper;
 
-import java.util.List;
-
 import edu.fdzc.hotel.wineshop.domain.HotelRoom;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 房间管理Mapper接口
@@ -67,4 +67,11 @@ public interface HotelRoomMapper {
      * @return
      */
     int checkRoomNameUnique(@Param("hotelId") Long hotelId, @Param("number") String number);
+
+    /**
+     * 根据类型查询符合的房间
+     * @param typeId
+     * @return
+     */
+    List<HotelRoom> selectHotelRoomByTypeId(Long typeId);
 }

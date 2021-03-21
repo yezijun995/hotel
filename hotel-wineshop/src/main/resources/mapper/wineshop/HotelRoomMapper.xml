@@ -117,4 +117,9 @@
     <select id="checkRoomNameUnique" resultType="int">
 		select count(1) from hotel_room where hotel_id = #{hotelId} and number = #{number} limit 1
 	</select>
+
+    <select id="selectHotelRoomByTypeId" parameterType="Long" resultMap="HotelRoomResult">
+        <include refid="selectHotelRoomVo"/>
+        where type_id = #{typeId} and status = 1
+    </select>
 </mapper>

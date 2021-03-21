@@ -1,5 +1,8 @@
 package edu.fdzc.hotel.common.utils.bean;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ObjectUtils;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.regex.Pattern;
  * 
  * @author yifelix
  */
+@Slf4j
 public class BeanUtils extends org.springframework.beans.BeanUtils
 {
     /** Bean方法名中属性名开始的下标 */
@@ -37,6 +41,28 @@ public class BeanUtils extends org.springframework.beans.BeanUtils
         catch (Exception e)
         {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * T transfer R
+     * @param sourceObject
+     * @param targetClass
+     * @param <T>
+     * @param <R>
+     * @return
+     */
+    public static <T, R> T convertObject(R sourceObject, Class<T> targetClass) {
+        try {
+            if (ObjectUtils.isEmpty(sourceObject)) {
+                throw new RuntimeException("sourceObject must not be null");
+            }
+            T t = targetClass.newInstance();
+            org.springframework.beans.BeanUtils.copyProperties(sourceObject, t);
+            return t;
+        } catch (Exception e) {
+            log.error("convert object error,targetClass:{}", targetClass.getName(), e);
+            throw new RuntimeException("convert object error",e);
         }
     }
 

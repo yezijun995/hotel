@@ -1,10 +1,9 @@
 package edu.fdzc.hotel.wineshop.service;
 
-import java.util.List;
-
 import edu.fdzc.hotel.common.core.domain.TreeSelect;
 import edu.fdzc.hotel.wineshop.domain.HotelRoomType;
-import edu.fdzc.hotel.wineshop.domain.HotelWineshop;
+
+import java.util.List;
 
 /**
  * 房间类型Service接口
@@ -68,4 +67,11 @@ public interface IHotelRoomTypeService {
      * @return 结果
      */
     public int deleteHotelRoomTypeById(Long roomTypeId);
+
+    /**
+     * 获取酒店下所有可预订房间类型
+     * @param hotelId
+     * @return
+     */
+    List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId);
 }
