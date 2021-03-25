@@ -8,10 +8,11 @@ import edu.fdzc.hotel.common.enums.BusinessType;
 import edu.fdzc.hotel.common.utils.poi.ExcelUtil;
 import edu.fdzc.hotel.wineshop.domain.HotelCheckIn;
 import edu.fdzc.hotel.wineshop.service.IHotelCheckInService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/hotel/checkIn")
 public class HotelCheckInController extends BaseController {
-    @Autowired
+    @Resource
     private IHotelCheckInService hotelCheckInService;
 
     /**
@@ -54,6 +55,20 @@ public class HotelCheckInController extends BaseController {
     @PutMapping("/in")
     public AjaxResult checkIn(@RequestBody HotelCheckIn hotelCheckIn) {
         return toAjax(hotelCheckInService.checkIn(hotelCheckIn));
+    }
+
+    @ApiOperation(value = "取消")
+    @DeleteMapping("/cancel/{checkInId}")
+    public AjaxResult cancel(@PathVariable Long checkInId) {
+        return toAjax(hotelCheckInService.cancel(checkInId));
+    }
+
+
+    @ApiOperation(value = "退房")
+    @PreAuthorize("@ss.hasPermi('hotel:checkIn:checkOut')")
+    @DeleteMapping("/checkOut/{checkInId}")
+    public AjaxResult checkOut(@PathVariable Long checkInId){
+        return toAjax(hotelCheckInService.checkOut(checkInId));
     }
 
     /**

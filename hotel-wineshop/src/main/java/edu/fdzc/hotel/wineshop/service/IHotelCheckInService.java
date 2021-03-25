@@ -43,7 +43,26 @@ public interface IHotelCheckInService {
      */
     public int updateHotelCheckIn(HotelCheckIn hotelCheckIn);
 
+    /**
+     * 入住
+     * @param hotelCheckIn
+     * @return
+     */
     int checkIn(HotelCheckIn hotelCheckIn);
+
+    /**
+     * 取消入住订单
+     * @param checkInId
+     * @return
+     */
+    int cancel(Long checkInId);
+
+    /**
+     * 退房
+     * @param checkInId
+     * @return
+     */
+    int checkOut(Long checkInId);
 
     /**
      * 批量删除入住退房登记管理

@@ -94,4 +94,19 @@ public class HotelOrdersController extends BaseController
     {
         return toAjax(hotelOrdersService.deleteHotelOrdersByIds(ordersIds));
     }
+
+    /**
+     * 获取订单总金额
+     * @return
+     */
+    @GetMapping("/money")
+    public AjaxResult getEarnMoney(){
+        Double earnMoney = hotelOrdersService.getEarnMoney();
+        return AjaxResult.success(earnMoney);
+    }
+
+    @GetMapping("/orderCount")
+    public AjaxResult getOrderCount(){
+        return AjaxResult.success(hotelOrdersService.getOrderCount());
+    }
 }

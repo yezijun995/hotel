@@ -80,4 +80,16 @@ public interface IHotelOrdersService
      * @return
      */
     int cancelOrder(Long orderId);
+
+    /**
+     * 获取金额
+     * @return
+     */
+    Double getEarnMoney();
+
+    /**
+     * 获取订单数
+     * @return
+     */
+    Long getOrderCount();
 }

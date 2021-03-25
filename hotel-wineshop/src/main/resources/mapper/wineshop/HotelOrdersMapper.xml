@@ -146,4 +146,12 @@
         <include refid="selectHotelOrdersVo"/>
         where user_id = #{userId}
     </select>
+
+    <select id="getEarnMoney" resultType="java.lang.Double">
+        SELECT sum(order_cost) money from hotel_orders WHERE order_state = '1' or order_state = '2' or order_state = '3'
+    </select>
+
+    <select id="getOrderCount" resultType="Long">
+        SELECT count(1) count from hotel_orders;
+    </select>
 </mapper>

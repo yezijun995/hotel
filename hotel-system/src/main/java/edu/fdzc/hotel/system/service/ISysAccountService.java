@@ -90,4 +90,9 @@ public interface ISysAccountService {
      * @return 结果
      */
     String checkEmailUnique(SysAccount account);
+
+    /**
+     * 获取用户数
+     */
+    Long getAccountCount();
 }

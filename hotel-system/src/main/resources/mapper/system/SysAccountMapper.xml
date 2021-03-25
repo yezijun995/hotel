@@ -154,4 +154,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="checkEmailUnique" parameterType="String" resultMap="SysAccountResult">
 		select account_id, email from sys_account where email = #{email} limit 1
 	</select>
+
+    <select id="getAccountCount" resultType="Long">
+        SELECT count(1) count from sys_account;
+    </select>
 </mapper>

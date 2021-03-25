@@ -6,7 +6,8 @@ public enum OrderStatus {
     WAS_CANCELED(-1,"已取消"),
     UNPAID(0,"未付款"),
     PAID(1,"待入住"),
-    CHECK_IN(2,"已入住")
+    CHECK_IN(2,"已入住"),
+    CHECK_OUT(3,"已退宿")
     ;
 
     private int code;

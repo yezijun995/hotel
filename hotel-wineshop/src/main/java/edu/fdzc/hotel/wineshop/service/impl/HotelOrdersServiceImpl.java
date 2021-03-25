@@ -186,4 +186,13 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
         return 1;
     }
 
+    @Override
+    public Double getEarnMoney() {
+        return hotelOrdersMapper.getEarnMoney();
+    }
+
+    @Override
+    public Long getOrderCount() {
+        return hotelOrdersMapper.getOrderCount();
+    }
 }

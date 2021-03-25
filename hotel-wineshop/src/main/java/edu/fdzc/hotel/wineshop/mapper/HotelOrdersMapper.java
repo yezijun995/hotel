@@ -66,4 +66,8 @@ public interface HotelOrdersMapper
      * @return
      */
     List<HotelOrders> getAllOrderByUser(Long userId);
+
+    Double getEarnMoney();
+
+    Long getOrderCount();
 }

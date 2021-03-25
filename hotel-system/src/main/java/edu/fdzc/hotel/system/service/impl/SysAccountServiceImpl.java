@@ -125,4 +125,9 @@ public class SysAccountServiceImpl implements ISysAccountService {
         }
         return UserConstants.UNIQUE;
     }
+
+    @Override
+    public Long getAccountCount() {
+        return sysAccountMapper.getAccountCount();
+    }
 }

@@ -181,5 +181,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{userId}
         </foreach> 
  	</delete>
+
+	<select id="getUserCount" resultType="Long">
+		select count(1) from sys_user;
+	</select>
 	
 </mapper> 

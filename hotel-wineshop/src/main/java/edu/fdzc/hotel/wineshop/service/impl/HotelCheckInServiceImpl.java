@@ -2,12 +2,19 @@ package edu.fdzc.hotel.wineshop.service.impl;
 
 import edu.fdzc.hotel.common.enums.OrderStatus;
 import edu.fdzc.hotel.wineshop.domain.HotelCheckIn;
+import edu.fdzc.hotel.wineshop.domain.HotelOrders;
+import edu.fdzc.hotel.wineshop.domain.HotelRoom;
 import edu.fdzc.hotel.wineshop.mapper.HotelCheckInMapper;
+import edu.fdzc.hotel.wineshop.mapper.HotelOrdersMapper;
+import edu.fdzc.hotel.wineshop.mapper.HotelRoomMapper;
 import edu.fdzc.hotel.wineshop.service.IHotelCheckInService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 入住退房登记管理Service业务层处理
@@ -19,6 +26,12 @@ import java.util.List;
 public class HotelCheckInServiceImpl implements IHotelCheckInService {
     @Resource
     private HotelCheckInMapper hotelCheckInMapper;
+
+    @Resource
+    private HotelOrdersMapper hotelOrdersMapper;
+
+    @Resource
+    private HotelRoomMapper hotelRoomMapper;
 
     /**
      * 查询入住退房登记管理
@@ -64,10 +77,84 @@ public class HotelCheckInServiceImpl implements IHotelCheckInService {
         return hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn);
     }
 
+    /**
+     * 入住房间管理
+     *
+     * @param hotelCheckIn
+     * @return
+     */
+    @Transactional
     @Override
     public int checkIn(HotelCheckIn hotelCheckIn) {
+        //修改订单表数据
+        HotelOrders orders = hotelOrdersMapper.selectHotelOrdersById(hotelCheckIn.getOrdersId());
+        orders.setOrderState(OrderStatus.CHECK_IN.getCode() + "");
+        if (!Objects.equals(hotelOrdersMapper.updateHotelOrders(orders), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -3;
+        }
         hotelCheckIn.setStatus(OrderStatus.CHECK_IN.getCode() + "");
-        return hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn);
+        if (!Objects.equals(hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -2;
+        }
+        return 1;
+    }
+
+    @Transactional
+    @Override
+    public int cancel(Long checkInId) {
+        HotelCheckIn hotelCheckIn = hotelCheckInMapper.selectHotelCheckInById(checkInId);
+
+        hotelCheckIn.setStatus(OrderStatus.WAS_CANCELED.getCode() + "");
+        //取消订单表数据
+        HotelOrders orders = hotelOrdersMapper.selectHotelOrdersById(hotelCheckIn.getOrdersId());
+        orders.setOrderState(OrderStatus.WAS_CANCELED.getCode() + "");
+        if (!Objects.equals(hotelOrdersMapper.updateHotelOrders(orders), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -3;
+        }
+        //修改房间预订
+        HotelRoom hotelRoom = hotelRoomMapper.selectHotelRoomById(orders.getRoomId());
+        hotelRoom.setStatus("1");
+        if (!Objects.equals(hotelRoomMapper.updateHotelRoom(hotelRoom), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -2;
+        }
+        if(!Objects.equals(hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn), 1)){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
+    @Transactional
+    public int checkOut(Long checkInId) {
+        HotelCheckIn hotelCheckIn = hotelCheckInMapper.selectHotelCheckInById(checkInId);
+        hotelCheckIn.setStatus(OrderStatus.CHECK_OUT.getCode() + "");
+
+        //修改订单表数据
+        HotelOrders orders = hotelOrdersMapper.selectHotelOrdersById(hotelCheckIn.getOrdersId());
+        orders.setOrderState(OrderStatus.CHECK_OUT.getCode() + "");
+
+        if (!Objects.equals(hotelOrdersMapper.updateHotelOrders(orders), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -3;
+        }
+        //修改房间预订
+        HotelRoom hotelRoom = hotelRoomMapper.selectHotelRoomById(orders.getRoomId());
+        hotelRoom.setStatus("1");
+        if (!Objects.equals(hotelRoomMapper.updateHotelRoom(hotelRoom), 1)) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -2;
+        }
+
+        if(!Objects.equals(hotelCheckInMapper.updateHotelCheckIn(hotelCheckIn), 1)){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
+        return 1;
     }
 
     /**

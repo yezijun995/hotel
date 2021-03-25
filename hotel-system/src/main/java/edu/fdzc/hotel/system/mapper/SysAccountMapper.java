@@ -1,7 +1,6 @@
 package edu.fdzc.hotel.system.mapper;
 
 import edu.fdzc.hotel.common.core.domain.entity.SysAccount;
-import edu.fdzc.hotel.common.core.domain.entity.SysUser;
 
 import java.util.List;
 
@@ -89,4 +88,10 @@ public interface SysAccountMapper {
      * @return 结果
      */
     SysAccount checkEmailUnique(String email);
+
+    /**
+     * 获取用户数
+     * @return
+     */
+    Long getAccountCount();
 }
