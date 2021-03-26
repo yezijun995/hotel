@@ -1,10 +1,12 @@
 package edu.fdzc.hotel.wineshop.service.impl;
 
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import edu.fdzc.hotel.common.enums.OrderStatus;
 import edu.fdzc.hotel.common.utils.bean.BeanUtils;
 import edu.fdzc.hotel.wineshop.domain.HotelCheckIn;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
 import edu.fdzc.hotel.wineshop.domain.HotelRoom;
+import edu.fdzc.hotel.wineshop.domain.OrdersDashboard;
 import edu.fdzc.hotel.wineshop.mapper.HotelOrdersMapper;
 import edu.fdzc.hotel.wineshop.mapper.HotelRoomMapper;
 import edu.fdzc.hotel.wineshop.service.IHotelCheckInService;
@@ -13,10 +15,12 @@ import edu.fdzc.hotel.wineshop.service.IHotelRoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * 订单管理Service业务层处理
@@ -194,5 +198,34 @@ public class HotelOrdersServiceImpl implements IHotelOrdersService {
     @Override
     public Long getOrderCount() {
         return hotelOrdersMapper.getOrderCount();
+    }
+
+    @Override
+    public List<Long> getOrderRadderChart() {
+        List<OrdersDashboard> orderRadderChart = hotelOrdersMapper.getOrderRadderChart();
+        List<Long> orderRadderChartList = new ArrayList<>();
+        for (OrderStatus value : OrderStatus.values()) {
+            Optional<OrdersDashboard> optional = orderRadderChart.stream().filter(ordersDashboard -> Objects.equals(ordersDashboard.getOrderState(),
+                    value.getCode() + "")).findAny();
+            orderRadderChartList.add(optional.isPresent() ? optional.get().getCount() : 0L);
+        }
+        return orderRadderChartList;
+    }
+
+    @Override
+    public List<KeyValue> getOrderBarChartCost() {
+        List<KeyValue> list = hotelOrdersMapper.getOrderBarChartCost();
+        Map<String, KeyValue> map = new HashMap<>();
+        if (!CollectionUtils.isEmpty(list)) {
+            map = list.stream().collect(Collectors.toMap(KeyValue::getName, Function.identity()));
+        }
+        List<KeyValue> result = new ArrayList<>();
+        for (int i = 1; i < 13; i++) {
+            KeyValue keyValue = new KeyValue();
+            keyValue.setName(i + "");
+            keyValue.setValue(map.containsKey(i + "") ? map.get(i + "").getValue() : 0);
+            result.add(keyValue);
+        }
+        return result;
     }
 }

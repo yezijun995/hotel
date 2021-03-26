@@ -16,14 +16,13 @@ import java.util.List;
 
 /**
  * 订单管理Controller
- * 
+ *
  * @author yifelix
  * @date 2021-02-16
  */
 @RestController
 @RequestMapping("/hotel/orders")
-public class HotelOrdersController extends BaseController
-{
+public class HotelOrdersController extends BaseController {
     @Autowired
     private IHotelOrdersService hotelOrdersService;
 
@@ -32,8 +31,7 @@ public class HotelOrdersController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:orders:list')")
     @GetMapping("/list")
-    public TableDataInfo list(HotelOrders hotelOrders)
-    {
+    public TableDataInfo list(HotelOrders hotelOrders) {
         startPage();
         List<HotelOrders> list = hotelOrdersService.selectHotelOrdersList(hotelOrders);
         return getDataTable(list);
@@ -45,8 +43,7 @@ public class HotelOrdersController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:orders:export')")
     @Log(title = "订单管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(HotelOrders hotelOrders)
-    {
+    public AjaxResult export(HotelOrders hotelOrders) {
         List<HotelOrders> list = hotelOrdersService.selectHotelOrdersList(hotelOrders);
         ExcelUtil<HotelOrders> util = new ExcelUtil<HotelOrders>(HotelOrders.class);
         return util.exportExcel(list, "orders");
@@ -57,8 +54,7 @@ public class HotelOrdersController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:orders:query')")
     @GetMapping(value = "/{ordersId}")
-    public AjaxResult getInfo(@PathVariable("ordersId") Long ordersId)
-    {
+    public AjaxResult getInfo(@PathVariable("ordersId") Long ordersId) {
         return AjaxResult.success(hotelOrdersService.selectHotelOrdersById(ordersId));
     }
 
@@ -68,8 +64,7 @@ public class HotelOrdersController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:orders:add')")
     @Log(title = "订单管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody HotelOrders hotelOrders)
-    {
+    public AjaxResult add(@RequestBody HotelOrders hotelOrders) {
         return toAjax(hotelOrdersService.insertHotelOrders(hotelOrders));
     }
 
@@ -79,8 +74,7 @@ public class HotelOrdersController extends BaseController
     @PreAuthorize("@ss.hasPermi('hotel:orders:edit')")
     @Log(title = "订单管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody HotelOrders hotelOrders)
-    {
+    public AjaxResult edit(@RequestBody HotelOrders hotelOrders) {
         return toAjax(hotelOrdersService.updateHotelOrders(hotelOrders));
     }
 
@@ -89,24 +83,34 @@ public class HotelOrdersController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('hotel:orders:remove')")
     @Log(title = "订单管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ordersIds}")
-    public AjaxResult remove(@PathVariable Long[] ordersIds)
-    {
+    @DeleteMapping("/{ordersIds}")
+    public AjaxResult remove(@PathVariable Long[] ordersIds) {
         return toAjax(hotelOrdersService.deleteHotelOrdersByIds(ordersIds));
     }
 
     /**
      * 获取订单总金额
+     *
      * @return
      */
     @GetMapping("/money")
-    public AjaxResult getEarnMoney(){
+    public AjaxResult getEarnMoney() {
         Double earnMoney = hotelOrdersService.getEarnMoney();
         return AjaxResult.success(earnMoney);
     }
 
     @GetMapping("/orderCount")
-    public AjaxResult getOrderCount(){
+    public AjaxResult getOrderCount() {
         return AjaxResult.success(hotelOrdersService.getOrderCount());
+    }
+
+    @GetMapping("/orderRadderChart")
+    public AjaxResult getOrderRadderChart() {
+        return AjaxResult.success(hotelOrdersService.getOrderRadderChart());
+    }
+
+    @GetMapping("/orderBarChartCost")
+    public AjaxResult getOrderBarChartCost(){
+        return AjaxResult.success(hotelOrdersService.getOrderBarChartCost());
     }
 }

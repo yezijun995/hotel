@@ -1,8 +1,8 @@
 package edu.fdzc.hotel.common.enums;
 
 public enum OrderStatus {
-    WAS_DELETED(-3,"已删除"),
-    OVERTIME(-2,"支付超时"),
+//    WAS_DELETED(-3,"已删除"),
+//    OVERTIME(-2,"支付超时"),
     WAS_CANCELED(-1,"已取消"),
     UNPAID(0,"未付款"),
     PAID(1,"待入住"),

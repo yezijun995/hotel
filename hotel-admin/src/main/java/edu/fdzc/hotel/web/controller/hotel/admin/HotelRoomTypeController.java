@@ -3,6 +3,7 @@ package edu.fdzc.hotel.web.controller.hotel.admin;
 import edu.fdzc.hotel.common.annotation.Log;
 import edu.fdzc.hotel.common.core.controller.BaseController;
 import edu.fdzc.hotel.common.core.domain.AjaxResult;
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import edu.fdzc.hotel.common.core.page.TableDataInfo;
 import edu.fdzc.hotel.common.enums.BusinessType;
 import edu.fdzc.hotel.common.utils.poi.ExcelUtil;
@@ -104,5 +105,11 @@ public class HotelRoomTypeController extends BaseController
     public AjaxResult remove(@PathVariable Long[] roomTypeIds)
     {
         return toAjax(hotelRoomTypeService.deleteHotelRoomTypeByIds(roomTypeIds));
+    }
+
+    @GetMapping("/pieChart")
+    public AjaxResult getPieChartRoomType(){
+        List<KeyValue> keyValueList = hotelRoomTypeService.getPieChartRoomType();
+        return AjaxResult.success(keyValueList);
     }
 }

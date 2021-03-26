@@ -1,5 +1,6 @@
 package edu.fdzc.hotel.wineshop.mapper;
 
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import edu.fdzc.hotel.wineshop.domain.HotelRoomType;
 
 import java.util.List;
@@ -66,4 +67,10 @@ public interface HotelRoomTypeMapper
      * @return
      */
     List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId);
+
+    /**
+     * 获取首页大屏房间订购
+     * @return
+     */
+    List<KeyValue> getPieChartRoomType();
 }

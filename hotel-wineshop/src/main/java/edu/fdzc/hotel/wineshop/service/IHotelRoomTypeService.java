@@ -3,6 +3,7 @@ package edu.fdzc.hotel.wineshop.service;
 import edu.fdzc.hotel.common.core.domain.TreeSelect;
 import edu.fdzc.hotel.wineshop.domain.HotelRoomType;
 
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import java.util.List;
 
 /**
@@ -74,4 +75,6 @@ public interface IHotelRoomTypeService {
      * @return
      */
     List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId);
+
+    List<KeyValue> getPieChartRoomType();
 }

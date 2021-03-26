@@ -1,5 +1,6 @@
 package edu.fdzc.hotel.wineshop.service.impl;
 
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import edu.fdzc.hotel.common.core.domain.TreeSelect;
 import edu.fdzc.hotel.wineshop.domain.HotelRoomType;
 import edu.fdzc.hotel.wineshop.mapper.HotelRoomTypeMapper;
@@ -100,5 +101,10 @@ public class HotelRoomTypeServiceImpl implements IHotelRoomTypeService {
     @Override
     public List<HotelRoomType> getBookableRoomTypeByHotelId(Long hotelId) {
         return hotelRoomTypeMapper.getBookableRoomTypeByHotelId(hotelId);
+    }
+
+    @Override
+    public List<KeyValue> getPieChartRoomType() {
+        return hotelRoomTypeMapper.getPieChartRoomType();
     }
 }

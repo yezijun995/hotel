@@ -121,4 +121,11 @@
         WHERE room.`status` = 1   and hotel_id = #{hotelId}
         GROUP BY room_type_id
     </select>
+
+    <select id="getPieChartRoomType" resultType="edu.fdzc.hotel.common.core.domain.KeyValue">
+        SELECT type.type_name name,count(1) value
+        FROM hotel_room room JOIN hotel_room_type type ON  room.type_id = room_type_id
+        WHERE room.`status` = 0
+        GROUP BY type_id
+    </select>
 </mapper>

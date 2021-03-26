@@ -1,5 +1,6 @@
 package edu.fdzc.hotel.wineshop.service;
 
+import edu.fdzc.hotel.common.core.domain.KeyValue;
 import edu.fdzc.hotel.wineshop.domain.HotelOrders;
 
 import java.util.List;
@@ -92,4 +93,8 @@ public interface IHotelOrdersService
      * @return
      */
     Long getOrderCount();
+
+    List<Long> getOrderRadderChart();
+
+    List<KeyValue> getOrderBarChartCost();
 }
