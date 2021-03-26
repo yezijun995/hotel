@@ -45,6 +45,7 @@
             <if test="numOfRoom != null ">and num_of_room = #{numOfRoom}</if>
             <if test="orderDate != null ">and order_date = #{orderDate}</if>
             <if test="orderState != null  and orderState != ''">and order_state = #{orderState}</if>
+            <if test="hotelId != null">and hotel_id = #{hotelId}</if>
         </where>
     </select>
 
