@@ -37,7 +37,7 @@
             <if test="perCount != null ">and per_count = #{perCount}</if>
             <if test="persons != null  and persons != ''">and persons like concat('%', #{persons}, '%')</if>
             <if test="checkInTime != null ">and check_in_time = #{checkInTime}</if>
-            <if test="hotel_id">and hotel_id = #{hotelId}</if>
+            <if test="hotelId != null">and hotel_id = #{hotelId}</if>
         </where>
     </select>
 

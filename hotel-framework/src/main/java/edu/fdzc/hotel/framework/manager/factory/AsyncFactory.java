@@ -5,11 +5,7 @@ import edu.fdzc.hotel.common.utils.LogUtils;
 import edu.fdzc.hotel.common.utils.ServletUtils;
 import edu.fdzc.hotel.common.utils.ip.AddressUtils;
 import edu.fdzc.hotel.common.utils.ip.IpUtils;
-import edu.fdzc.hotel.common.utils.spring.SpringUtils;
 import edu.fdzc.hotel.system.domain.SysLogininfor;
-import edu.fdzc.hotel.system.domain.SysOperLog;
-import edu.fdzc.hotel.system.service.ISysLogininforService;
-import edu.fdzc.hotel.system.service.ISysOperLogService;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,29 +70,29 @@ public class AsyncFactory
                 {
                     logininfor.setStatus(Constants.FAIL);
                 }
-                // 插入数据
-                SpringUtils.getBean(ISysLogininforService.class).insertLogininfor(logininfor);
+//                // 插入数据
+//                SpringUtils.getBean(ISysLogininforService.class).insertLogininfor(logininfor);
             }
         };
     }
 
-    /**
-     * 操作日志记录
-     * 
-     * @param operLog 操作日志信息
-     * @return 任务task
-     */
-    public static TimerTask recordOper(final SysOperLog operLog)
-    {
-        return new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                // 远程查询操作地点
-                operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
-                SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
-            }
-        };
-    }
+//    /**
+//     * 操作日志记录
+//     *
+//     * @param operLog 操作日志信息
+//     * @return 任务task
+//     */
+//    public static TimerTask recordOper(final SysOperLog operLog)
+//    {
+//        return new TimerTask()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                // 远程查询操作地点
+//                operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
+//                SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+//            }
+//        };
+//    }
 }

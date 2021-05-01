@@ -9,8 +9,6 @@ import edu.fdzc.hotel.common.utils.ServletUtils;
 import edu.fdzc.hotel.common.utils.StringUtils;
 import edu.fdzc.hotel.common.utils.ip.IpUtils;
 import edu.fdzc.hotel.common.utils.spring.SpringUtils;
-import edu.fdzc.hotel.framework.manager.AsyncManager;
-import edu.fdzc.hotel.framework.manager.factory.AsyncFactory;
 import edu.fdzc.hotel.framework.web.service.TokenService;
 import edu.fdzc.hotel.system.domain.SysOperLog;
 import org.aspectj.lang.JoinPoint;
@@ -116,7 +114,7 @@ public class LogAspect
             // 处理设置注解上的参数
             getControllerMethodDescription(joinPoint, controllerLog, operLog);
             // 保存数据库
-            AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
+//            AsyncManager.me().execute(AsyncFactory.recordOper(operLog));
         }
         catch (Exception exp)
         {

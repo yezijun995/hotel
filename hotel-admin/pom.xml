@@ -63,12 +63,6 @@
             <artifactId>hotel-framework</artifactId>
         </dependency>
 
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>edu.fdzc.hotel</groupId>
-            <artifactId>hotel-quartz</artifactId>
-        </dependency>
-
         <!-- 代码生成-->
         <dependency>
             <groupId>edu.fdzc.hotel</groupId>
