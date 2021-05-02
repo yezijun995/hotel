@@ -1,4 +1,4 @@
-package edu.fdzc.hotel.web.controller.system;
+package edu.fdzc.hotel.web.controller.system.admin;
 
 import edu.fdzc.hotel.common.annotation.Log;
 import edu.fdzc.hotel.common.annotation.RepeatSubmit;
