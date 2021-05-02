@@ -3,12 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.fdzc.hotel.wineshop.mapper.HotelMessageMapper">
-    
+
     <resultMap type="HotelMessage" id="HotelMessageResult">
         <result property="messageId"    column="message_id"    />
         <result property="hotelId"    column="hotel_id"    />
         <result property="hotelName"    column="hotel_name"    />
-        <result property="hotelUserId"    column="hotel_user_id"    />
+        <result property="userId"    column="user_id"    />
         <result property="nickname"    column="nickname"    />
         <result property="content"    column="content"    />
         <result property="icon"    column="icon"    />
@@ -21,14 +21,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectHotelMessageVo">
-        select message_id, hotel_id, hotel_name, hotel_user_id, nickname, content, icon, parent_message_id, create_by, create_time, update_by, update_time, del_flag from hotel_message
+        select message_id, hotel_id, hotel_name, user_id, nickname, content, icon, parent_message_id, create_by, create_time, update_by, update_time, del_flag from hotel_message
     </sql>
 
     <select id="selectHotelMessageList" parameterType="HotelMessage" resultMap="HotelMessageResult">
         <include refid="selectHotelMessageVo"/>
-        <where>  
+        <where>
             <if test="hotelName != null  and hotelName != ''"> and hotel_name like concat('%', #{hotelName}, '%')</if>
             <if test="nickname != null  and nickname != ''"> and nickname like concat('%', #{nickname}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectHotelMessageInfo" parameterType="Long" resultMap="HotelMessageResult">
+        <include refid="selectHotelMessageVo"/>
+        <where>
+            <if test="hotelId != null"> and hotel_id = #{hotelId} </if>
         </where>
     </select>
     
@@ -42,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="hotelId != null">hotel_id,</if>
             <if test="hotelName != null">hotel_name,</if>
-            <if test="hotelUserId != null">hotel_user_id,</if>
+            <if test="userId != null">user_id,</if>
             <if test="nickname != null">nickname,</if>
             <if test="content != null">content,</if>
             <if test="icon != null">icon,</if>
@@ -56,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="hotelId != null">#{hotelId},</if>
             <if test="hotelName != null">#{hotelName},</if>
-            <if test="hotelUserId != null">#{hotelUserId},</if>
+            <if test="userId != null">#{userId},</if>
             <if test="nickname != null">#{nickname},</if>
             <if test="content != null">#{content},</if>
             <if test="icon != null">#{icon},</if>
@@ -74,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="hotelId != null">hotel_id = #{hotelId},</if>
             <if test="hotelName != null">hotel_name = #{hotelName},</if>
-            <if test="hotelUserId != null">hotel_user_id = #{hotelUserId},</if>
+            <if test="user_id != null">user_id = #{userId},</if>
             <if test="nickname != null">nickname = #{nickname},</if>
             <if test="content != null">content = #{content},</if>
             <if test="icon != null">icon = #{icon},</if>
@@ -93,9 +100,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteHotelMessageByIds" parameterType="String">
-        delete from hotel_message where message_id in 
+        delete from hotel_message where message_id in
         <foreach item="messageId" collection="array" open="(" separator="," close=")">
             #{messageId}
         </foreach>
     </delete>
+
+    <select id="getMessageCount" resultType="Long">
+        SELECT count(1) count from hotel_message;
+    </select>
 </mapper>

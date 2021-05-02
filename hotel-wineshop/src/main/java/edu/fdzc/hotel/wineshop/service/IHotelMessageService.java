@@ -1,7 +1,9 @@
 package edu.fdzc.hotel.wineshop.service;
 
-import java.util.List;
 import edu.fdzc.hotel.wineshop.domain.HotelMessage;
+import edu.fdzc.hotel.wineshop.domain.dto.HotelMessageInfoDTO;
+
+import java.util.List;
 
 /**
  * 留言管理Service接口
@@ -18,6 +20,13 @@ public interface IHotelMessageService
      * @return 留言管理
      */
     public HotelMessage selectHotelMessageById(Long messageId);
+
+    /**
+     * 根据酒店Id查询留言信息
+     * @param hotelId
+     * @return
+     */
+    List<HotelMessageInfoDTO> selectHotelMessageInfo(Long hotelId);
 
     /**
      * 查询留言管理列表
@@ -58,4 +67,10 @@ public interface IHotelMessageService
      * @return 结果
      */
     public int deleteHotelMessageById(Long messageId);
+
+    /**
+     * 获取留言数量
+     * @return
+     */
+    Long getMessageCount();
 }

@@ -126,4 +126,19 @@ public class Constants
      * 资源映射路径 前缀
      */
     public static final String RESOURCE_PREFIX = "/profile";
+
+    /**
+     * 父类Id
+     */
+    public static final Long DEFAULT_PARENT_ID = -1L;
+
+    /**
+     * 客户类型
+     */
+    public static final Byte ACCOUNT_TYPE = 0;
+
+    /**
+     * 用户类型
+     */
+    public static final Byte USER_TYPE = 1;
 }

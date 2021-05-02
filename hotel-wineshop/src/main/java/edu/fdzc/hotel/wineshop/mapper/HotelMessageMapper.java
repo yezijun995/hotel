@@ -1,7 +1,8 @@
 package edu.fdzc.hotel.wineshop.mapper;
 
-import java.util.List;
 import edu.fdzc.hotel.wineshop.domain.HotelMessage;
+
+import java.util.List;
 
 /**
  * 留言管理Mapper接口
@@ -26,6 +27,8 @@ public interface HotelMessageMapper
      * @return 留言管理集合
      */
     public List<HotelMessage> selectHotelMessageList(HotelMessage hotelMessage);
+
+    List<HotelMessage> selectHotelMessageInfo(Long hotelId);
 
     /**
      * 新增留言管理
@@ -58,4 +61,10 @@ public interface HotelMessageMapper
      * @return 结果
      */
     public int deleteHotelMessageByIds(Long[] messageIds);
+
+    /**
+     * 获取留言数量
+     * @return
+     */
+    Long getMessageCount();
 }

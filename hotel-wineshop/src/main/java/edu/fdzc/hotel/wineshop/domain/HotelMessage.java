@@ -26,7 +26,7 @@ public class HotelMessage extends BaseEntity
     private String hotelName;
 
     /** 用户ID */
-    private Long hotelUserId;
+    private Long userId;
 
     /** 昵称 */
     @Excel(name = "昵称")
@@ -69,20 +69,20 @@ public class HotelMessage extends BaseEntity
         this.hotelName = hotelName;
     }
 
-    public String getHotelName() 
+    public String getHotelName()
     {
         return hotelName;
     }
-    public void setHotelUserId(Long hotelUserId) 
-    {
-        this.hotelUserId = hotelUserId;
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public Long getHotelUserId() 
-    {
-        return hotelUserId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-    public void setNickname(String nickname) 
+
+    public void setNickname(String nickname)
     {
         this.nickname = nickname;
     }
@@ -134,7 +134,7 @@ public class HotelMessage extends BaseEntity
             .append("messageId", getMessageId())
             .append("hotelId", getHotelId())
             .append("hotelName", getHotelName())
-            .append("hotelUserId", getHotelUserId())
+            .append("hotelUserId", getUserId())
             .append("nickname", getNickname())
             .append("content", getContent())
             .append("icon", getIcon())
