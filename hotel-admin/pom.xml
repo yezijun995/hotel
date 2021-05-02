@@ -62,13 +62,6 @@
             <groupId>edu.fdzc.hotel</groupId>
             <artifactId>hotel-framework</artifactId>
         </dependency>
-
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>edu.fdzc.hotel</groupId>
-            <artifactId>hotel-generator</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
