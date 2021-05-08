@@ -31,7 +31,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 查询房间管理列表
      */
-    @PreAuthorize("@ss.hasPermi('room:room:list')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:list')")
     @GetMapping("/list")
     public TableDataInfo list(HotelRoom hotelRoom) {
         startPage();
@@ -42,7 +42,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 导出房间管理列表
      */
-    @PreAuthorize("@ss.hasPermi('room:room:export')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:export')")
     @Log(title = "房间管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(HotelRoom hotelRoom) {
@@ -54,7 +54,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 获取房间管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('room:room:query')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:query')")
     @GetMapping(value = "/{roomId}")
     public AjaxResult getInfo(@PathVariable("roomId") Long roomId) {
         return AjaxResult.success(hotelRoomService.selectHotelRoomById(roomId));
@@ -63,7 +63,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 新增房间管理
      */
-    @PreAuthorize("@ss.hasPermi('room:room:add')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:add')")
     @Log(title = "房间管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody HotelRoom hotelRoom) {
@@ -77,7 +77,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 修改房间管理
      */
-    @PreAuthorize("@ss.hasPermi('room:room:edit')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:edit')")
     @Log(title = "房间管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HotelRoom hotelRoom) {
@@ -88,7 +88,7 @@ public class HotelRoomController extends BaseController {
     /**
      * 删除房间管理
      */
-    @PreAuthorize("@ss.hasPermi('room:room:remove')")
+    @PreAuthorize("@ss.hasPermi('hotel:room:remove')")
     @Log(title = "房间管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{roomIds}")
     public AjaxResult remove(@PathVariable Long[] roomIds) {

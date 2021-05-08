@@ -31,7 +31,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 查询酒店列表
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:list')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:list')")
     @GetMapping("/list")
     public TableDataInfo list(HotelWineshop hotelWineshop) {
         startPage();
@@ -54,7 +54,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 导出酒店列表
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:export')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:export')")
     @Log(title = "酒店管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(HotelWineshop hotelWineshop) {
@@ -66,7 +66,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 获取酒店详细信息
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:query')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:query')")
     @GetMapping(value = "/{hotelId}")
     public AjaxResult getInfo(@PathVariable("hotelId") Long hotelId) {
         return AjaxResult.success(hotelWineshopService.selectHotelWineshopById(hotelId));
@@ -75,7 +75,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 新增酒店
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:add')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:add')")
     @Log(title = "酒店管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody HotelWineshop hotelWineshop) {
@@ -89,7 +89,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 修改酒店
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:edit')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:edit')")
     @Log(title = "酒店管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody HotelWineshop hotelWineshop) {
@@ -103,7 +103,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 删除酒店
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:remove')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:remove')")
     @Log(title = "酒店管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{hotelIds}")
     public AjaxResult remove(@PathVariable Long[] hotelIds) {
@@ -113,7 +113,7 @@ public class HotelWineshopController extends BaseController {
     /**
      * 状态修改
      */
-    @PreAuthorize("@ss.hasPermi('wineshop:wineshop:edit')")
+    @PreAuthorize("@ss.hasPermi('hotel:wineshop:edit')")
     @Log(title = "酒店管理", businessType = BusinessType.UPDATE)
     @PutMapping("/changeStatus")
     public AjaxResult changeStatus(@RequestBody HotelWineshop hotelWineshop) {
