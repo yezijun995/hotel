@@ -36,7 +36,6 @@
         <module>hotel-admin</module>
         <module>hotel-framework</module>
         <module>hotel-system</module>
-        <module>hotel-generator</module>
         <module>hotel-common</module>
         <module>hotel-wineshop</module>
     </modules>
@@ -168,12 +167,6 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
-            <!-- 代码生成-->
-            <dependency>
-                <groupId>edu.fdzc.hotel</groupId>
-                <artifactId>hotel-generator</artifactId>
-                <version>${hotel.version}</version>
-            </dependency>
 
             <!-- 核心模块-->
             <dependency>
@@ -227,14 +220,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -263,4 +250,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
 </project>

@@ -65,13 +65,57 @@
     </dependencies>
 
     <build>
+        <finalName>hotel-admin</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <!-- 生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <!--<manifest>
+                            &lt;!&ndash; 是否要把第三方jar放到manifest的classpath中 &ndash;&gt;
+                            <addClasspath>true</addClasspath>
+                            &lt;!&ndash; 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ &ndash;&gt;
+                            <classpathPrefix>lib/</classpathPrefix>
+                            &lt;!&ndash; 应用的main class &ndash;&gt;
+                            <mainClcom.yjcloud.health.vcard.StarterApplicationtion</mainClass>
+                        </manifest>-->
+                    </archive>
+                    <!-- 过滤掉不希望包含在jar中的文件 -->
+                    <excludes>
+                        <exclude>bootstrap.properties</exclude>
+                        <exclude>application.yml</exclude>
+                        <exclude>application-pro.yml</exclude>
+                        <exclude>log4j2.json</exclude>
+                        <exclude>rebel.xml</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.1.RELEASE</version>
                 <configuration>
-                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <includeSystemScope>true</includeSystemScope>
+                    <fork>true</fork>
+                    <finalName>${project.name}</finalName>
+                    <attach>false</attach>
+                    <layout>JAR</layout>
                 </configuration>
                 <executions>
                     <execution>
@@ -81,6 +125,28 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <!-- Specifies the configuration file of the assembly plugin -->
+                    <descriptors>
+                        <descriptor>assembly/package-physical.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -91,7 +157,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}</finalName>
     </build>
 
 </project>
